@@ -40,9 +40,9 @@ const Cart: FC<CartProps> = ({ itemsCount = 0 }) => {
           width={23}
           height={20}
         />
-        <span className="pointer-events-none items-count w-5 h-5 absolute bottom-[-10px] right-[-10px] text-xs font-bold rounded-full bg-light-100 text-dark-100 flex justify-center items-center">
-          {itemsCount > 0 ? itemsCount : ""}
-        </span>
+        
+          {itemsCount > 0 ? `<span className="pointer-events-none items-count w-5 h-5 absolute bottom-[-10px] right-[-10px] text-xs font-bold rounded-full bg-light-100 text-dark-100 flex justify-center items-center"></span>${itemsCount}</span>`: ""}
+        
       </button>
     </>
   );

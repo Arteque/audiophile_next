@@ -1,5 +1,5 @@
 "use client";
-
+import Classes from "./Nav.module.scss";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -31,7 +31,7 @@ const Nav = () => {
 
   return (
     <>
-      <nav className="mainNav">
+      <nav className={`${Classes.mainNav} absolute`}>
         <ul className="mainNav__Items">
           {navigation.map(({ id, path, name }) => (
             <li

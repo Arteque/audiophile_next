@@ -1,0 +1,13 @@
+body[data-menu="close"] {
+  .mainNav {
+    opacity: 0;
+    pointer-events: none;
+    inset-inline: 2rem;
+  }
+}
+body[data-menu="open"] {
+  .mainNav {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
