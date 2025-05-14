@@ -1,0 +1,28 @@
+import type { Metadata } from "next";
+import {Manrope} from "next/font/google"
+import "../styles/globals.css";
+import Header from "@/_components/shared/Header";
+
+export const metadata: Metadata = {
+  title: "Audiophile Online Shope",
+  description: "Code By Ahmed Lemssiah",
+};
+
+const manrope = Manrope({
+  subsets:['latin']
+})
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning className={manrope.className}>
+      <body suppressHydrationWarning>
+          <Header />
+          <main>{children}</main>
+      </body>
+    </html>
+  );
+}

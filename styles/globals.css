@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+:root{
+  --sans: "Manrope", sans-serif;
+}
+
+@theme inline {
+  --color-prime-100:#D87D4A;
+  --color-prime-200:#fbaf85;
+  --color-dark-100:#101010; 
+  --color-dark-200:#000000; 
+  --color-light-100: #F1F1F1;
+  --color-light-200: #FAFAFA;
+  --font-sans: var(--sans);
+}
+
+body, html{ 
+  font-family: var(--sans);
+}

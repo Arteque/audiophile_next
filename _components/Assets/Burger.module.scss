@@ -1,0 +1,81 @@
+.line_1, .line_2, .line_3 {
+  transition: all 0.3s;
+  position: relative;
+  transform-origin: center;
+  --duration: 0.1s;
+}
+
+body[data-menu="open"] {
+  .line_2 {
+    opacity: 0;
+    transition-delay: calc(var(--duration) - 50%);
+  }
+
+  .line_1 {
+    animation: openMenuLine1 var(--duration) linear forwards;
+  }
+
+  .line_3 {
+    animation: openMenuLine3 var(--duration) linear forwards;
+  }
+}
+
+body[data-menu="close"] {
+  .line_1 {
+    animation: closeMenuLine1 var(--duration) linear forwards;
+  }
+
+  .line_3 {
+    animation: closeMenuLine3 var(--duration) linear forwards;
+  }
+}
+
+// Animating line_1 (typically upward + -45deg rotation)
+@keyframes openMenuLine1 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(0, 4px) rotate(0);
+  }
+  100% {
+    transform: translate(4px, 4px) rotate(-45deg);
+  }
+}
+
+@keyframes closeMenuLine1 {
+  0% {
+    transform: translate(4px, 4px) rotate(-45deg);
+  }
+  50% {
+    transform: translate(0, 4px) rotate(0);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+// Animating line_3 (downward + 45deg rotation)
+@keyframes openMenuLine3 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(0, -5px) rotate(0);
+  }
+  100% {
+    transform: translate(4px, -5px) rotate(45deg);
+  }
+}
+
+@keyframes closeMenuLine3 {
+  0% {
+    transform: translate(4px, -5px) rotate(45deg);
+  }
+  50% {
+    transform: translate(0, -5px) rotate(0);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
