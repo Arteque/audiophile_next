@@ -17,3 +17,16 @@
 body, html{ 
   font-family: var(--sans);
 }
+body::after{
+  content:"";
+  position:absolute;
+  inset: 0;
+  z-index: 95;
+  background: var(--color-dark-100);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+body[data-menu="open"]::after{
+  opacity: 0.8;
+}

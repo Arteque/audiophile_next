@@ -31,7 +31,7 @@ const Nav = () => {
 
   return (
     <>
-      <nav className={`${Classes.mainNav} absolute`}>
+      <nav className={`${Classes.mainNav} mainNav absolute top-full text-dark-100 bg-light-100`}>
         <ul className="mainNav__Items">
           {navigation.map(({ id, path, name }) => (
             <li
