@@ -6,7 +6,7 @@ interface ModalContainerProps {
 
 const ModalContainer:FC<ModalContainerProps> = ({children}) => {
   return (
-    <div className="modalContainer border-[0.5rem]">
+    <div className="modalContainer border-[0.5rem] max-w-[33.75rem]">
       {children}
     </div>
   )
