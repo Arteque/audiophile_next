@@ -16,7 +16,7 @@ useEffect(()=>{
 }, [burgerState])
 
   return (
-    <button onClick={burgerStateHandler}>
+    <button onClick={burgerStateHandler} className="burger lg:hidden" aria-label="Menu">
       <svg width="16" height="15" xmlns="http://www.w3.org/2000/svg">
         <g fill="#FFF" fillRule="evenodd">
           <path className={Class.line_1} d="M0 0h16v3H0z" />

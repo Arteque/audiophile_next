@@ -30,3 +30,8 @@ body::after{
 body[data-menu="open"]::after{
   opacity: 0.8;
 }
+
+button{
+  cursor: pointer;
+  border: none;
+}
