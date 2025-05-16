@@ -9,7 +9,7 @@ type ButtonProps = {
   className?: string;
 };
 
-const Button = ({ href, text, variant, className, ...props }: ButtonProps) => {
+const Button = ({ href, text, variant, className="", ...props }: ButtonProps) => {
   const buttonType = () => {
     switch (variant) {
       case "call":
@@ -19,7 +19,7 @@ const Button = ({ href, text, variant, className, ...props }: ButtonProps) => {
       case "inline":
         return "text-dark-100/50 flex gap-[13px] items-center hover:text-prime-100 w-fit";
       default:
-        return "px-[2rem] py-[1rem] bg-prime-100 text-light-100 hover:bg-prime-200";
+        return "";
     }
   };
 
@@ -46,4 +46,5 @@ const Button = ({ href, text, variant, className, ...props }: ButtonProps) => {
 Button.defaultProps = {
   variant: "call",
 };
+
 export default Button;
