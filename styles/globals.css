@@ -1,25 +1,22 @@
 @import "tailwindcss";
 
-:root{
+:root {
   --sans: "Manrope", sans-serif;
 }
 
 @theme inline {
-  --color-prime-100:#D87D4A;
-  --color-prime-200:#fbaf85;
-  --color-dark-100:#101010; 
-  --color-dark-200:#000000; 
-  --color-light-100: #F1F1F1;
-  --color-light-200: #FAFAFA;
-  --font-sans: var(--sans);
+  --font-display: var(--sans);
+  --color-prime-100: #d87d4a;
+  --color-prime-200: #fbaf85;
+  --color-dark-100: #101010;
+  --color-dark-200: #000000;
+  --color-light-100: #f1f1f1;
+  --color-light-200: #fafafa;
 }
 
-body, html{ 
-  font-family: var(--sans);
-}
-body::after{
-  content:"";
-  position:absolute;
+body::after {
+  content: "";
+  position: absolute;
   inset: 0;
   z-index: 95;
   background: var(--color-dark-100);
@@ -29,16 +26,19 @@ body::after{
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
   -moz-backdrop-filter: blur(0px);
-
 }
-body[data-menu="open"]::after{
+body[data-menu="open"]::after {
   opacity: 0.8;
   backdrop-filter: grayscale(1);
-  -webkit-backdrop-filter: grayscale(1);;
-  -moz-backdrop-filter: grayscale(1);;
+  -webkit-backdrop-filter: grayscale(1);
+  -moz-backdrop-filter: grayscale(1);
 }
 
-button{
+button {
   cursor: pointer;
   border: none;
+}
+
+.container {
+  @apply max-w-[1110px] mx-auto;
 }

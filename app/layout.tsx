@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import {Manrope} from "next/font/google"
+import { Manrope } from "next/font/google";
 import "../styles/globals.css";
 import Header from "@/_components/shared/Header";
 
@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 };
 
 const manrope = Manrope({
-  subsets:['latin']
-})
+  subsets: ["latin"],
+});
 
 export default function RootLayout({
   children,
@@ -20,8 +20,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={manrope.className}>
       <body suppressHydrationWarning className="lg:[&::after]:hidden">
-          <Header />
-          <main>{children}</main>
+        <Header />
+        <main>{children}</main>
       </body>
     </html>
   );

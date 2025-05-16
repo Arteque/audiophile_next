@@ -1,34 +1,38 @@
-import Image from "next/image";
 import Subhead from "@/_components/Assets/Subhead";
 import Button from "@/_components/Assets/Button";
+import Paragraph from "@/_components/Assets/Paragraph";
 
 const Hero = () => {
   return (
     <section
-      className="heroSection relative min-h-[100dvh] pt-[20dvh] bg-dark-100"
+      className="heroSection relative h-[792px] pt-[25dvh] bg-[#191919] "
       id="heroSection"
     >
-      <div className="textContainer container relative z-5 px-[24px] max-w-[379px] mx-auto md:px-0">
-        <h1 className="text-center">
-          <Subhead className="text-light-100/40">New Product</Subhead>
-          <span className="uppercase text-light-200 font-bold text-[36px] tracking-[1.29px] leading-[40px] md:text-[56px] md:leading-[58px] md:tracking-[2px]">
-            xx99 mark ii headphones
-          </span>
-        </h1>
-        <p className="text-center text-light-100/75 text-[15px] leading-[25px] my-[28px]">
-          Experience natural, lifelike audio and exceptional build quality made
-          for the passionate music enthusiast.
-        </p>
-        <Button
-          variant="call"
-          href="/products/headphones/xx99-mark-ii"
-          text="See Product"
-          className="block w-fit mx-auto"
-        />
+      <div className="textContainer  container relative  z-5 px-[24px] md:px-0">
+        <div className="mx-auto text-center lg:text-left max-w-[379px] lg:max-w-[398px] lg:mx-[unset]">
+          <h1 className=" mb-[28px]">
+            <Subhead className="text-light-100/40 mb-[24px]">
+              New Product
+            </Subhead>
+            <span className="uppercase text-light-200 font-bold text-[36px] tracking-[1.29px] leading-[40px] md:text-[56px] md:leading-[58px] md:tracking-[2px]">
+              xx99 mark ii headphones
+            </span>
+          </h1>
+          <Paragraph>
+            Experience natural, lifelike audio and exceptional build quality
+            made for the passionate music enthusiast.
+          </Paragraph>
+          <Button
+            variant="call"
+            href="/products/headphones/xx99-mark-ii"
+            text="See Product"
+            className="block w-fit mx-auto lg:mx-[unset]"
+          />
+        </div>
       </div>
 
-      <div className="mediaContainer absolute inset-0">
-        <picture className="block">
+      <div className="mediaContainer absolute inset-0 max-w-[1410px] mx-auto">
+        <picture>
           <source
             media="(min-width:1024px)"
             srcSet="/home/desktop/image-hero.jpg"
@@ -40,6 +44,7 @@ const Hero = () => {
           <img
             src="/home/mobile/image-header.jpg"
             alt="xx99 mark ii headphones"
+            className="block w-full mx-auto h-full object-cover translate-y-[-10%]"
           />
         </picture>
       </div>
