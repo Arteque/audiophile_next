@@ -14,7 +14,7 @@ const Hero = () => {
             <Subhead className="text-light-100/40 mb-[24px]">
               New Product
             </Subhead>
-            <span className="uppercase text-light-200 font-bold text-[36px] tracking-[1.29px] leading-[40px] md:text-[56px] md:leading-[58px] md:tracking-[2px]">
+            <span className="uppercase text-light-200 heading_main">
               xx99 mark ii headphones
             </span>
           </h1>
@@ -49,6 +49,7 @@ const Hero = () => {
         </picture>
       </div>
     </section>
+    
   );
 };
 

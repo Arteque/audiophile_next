@@ -38,7 +38,31 @@ button {
   cursor: pointer;
   border: none;
 }
-
+a, button{
+  transition: all 0.3s;
+}
+/* Nav*/
+.active{
+  @apply text-prime-100;
+}
+/* Nav*/
+/*Container*/
 .container {
   @apply max-w-[1110px] mx-auto;
 }
+/*Container*/
+
+/*Heading*/
+.heading_main{
+  @apply text-[36px] leading-[40px] tracking-[1.29px] uppercase font-bold;
+}
+@media (min-width: 768px) {
+  .heading_main{
+    @apply text-[56px] leading-[58px] tracking-[2px];
+  }
+}
+
+.heading_sub{
+  @apply block uppercase text-[14px] tracking-[10px] font-normal; 
+}
+/*Heading*/

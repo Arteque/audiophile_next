@@ -7,7 +7,7 @@ type SubheadProps = {
 const Subhead = ({children, className, ...props}:SubheadProps) => {
 
   return (
-    <span className={`block uppercase text-[14px] tracking-[10px] font-normal ${className}` } {...props}>
+    <span className={`heading_sub ${className}` } {...props}>
         {children}
     </span>
   )

@@ -38,13 +38,12 @@ const Nav = () => {
       >
         <ul className="mainNav__Items lg:flex lg:gap-[1rem]">
           {navigation.map(({ id, path, name }) => (
-            <li
-              key={id}
-              className={`mainNav__item ${pathname === path ? "active" : ""}`}
-            >
+            <li key={id} className={`mainNav__item`}>
               <Link
                 href={path}
-                className="text-[13px] leading-[25px] tracking-[2px] font-bold block p-1 uppercase lg:p-0 transition-all duration-[0.3s] lg:text-light-100/50 lg:hover:text-light-100"
+                className={`${
+                  pathname === path ? "active" : ""
+                } text-[13px] leading-[25px] tracking-[2px] font-bold block p-1 uppercase lg:p-0 transition-all duration-[0.3s] lg:text-light-100/50 lg:hover:text-light-100 `}
               >
                 {name}
               </Link>
