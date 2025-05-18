@@ -5,7 +5,7 @@ import Paragraph from "@/_components/Assets/Paragraph";
 const Hero = () => {
   return (
     <section
-      className="heroSection relative h-[792px] pt-[25dvh] bg-[#191919] "
+      className="heroSection relative min-h-[100dvh] pt-[25dvh] bg-[#191919] "
       id="heroSection"
     >
       <div className="textContainer  container relative  z-5 px-[24px] md:px-0">

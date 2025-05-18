@@ -65,9 +65,6 @@ a, button{
 /*Heading*/
 
 /* ShowCaseProducts */
-.productCard{
-  @apply flex flex-col items-center rounded-[8px] max-w-[327px] relative;
-}
 .productCard::before{
   content:"";
   position:absolute;

@@ -1,7 +1,7 @@
 import CategorieItemsList from "@/_components/Assets/CategorieItemsList"
 const Categories = () => {
   return (
-    <section>
+    <section className="mt-[127px] mb-[168px]">
       <div className="container">
         <div className="lg:grid lg:grid-cols-3 lg:gap-[2rem] lg:py-[4rem]">
             <CategorieItemsList />
