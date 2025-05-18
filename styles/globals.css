@@ -23,9 +23,6 @@ body::after {
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s;
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  -moz-backdrop-filter: blur(0px);
 }
 body[data-menu="open"]::after {
   opacity: 0.8;
@@ -66,3 +63,17 @@ a, button{
   @apply block uppercase text-[14px] tracking-[10px] font-normal; 
 }
 /*Heading*/
+
+/* ShowCaseProducts */
+.productCard{
+  @apply flex flex-col items-center rounded-[8px] max-w-[327px] relative;
+}
+.productCard::before{
+  content:"";
+  position:absolute;
+  inset: 25% 0 0 0;
+  background: #F1F1F1F1;
+  z-index: -1;
+  border-radius: 8px;
+}
+/* ShowCaseProducts */

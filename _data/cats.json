@@ -1,0 +1,32 @@
+[
+    {
+        "id":1,
+        "name":"Headphones",
+        "path":"headphones",
+        "img":{
+            "src":"image-category-thumbnail-headphones.png",
+            "width":79.92,
+            "height":104
+        }
+    },
+    {
+        "id":2,
+        "name":"Speakers",
+        "path":"speakers",
+        "img":{
+            "src":"image-category-thumbnail-speakers.png",
+            "width":84.04,
+            "height":101
+        }
+    },
+    {
+        "id":3,
+        "name":"Earphones",
+        "path":"earphones",
+        "img":{
+            "src":"image-category-thumbnail-earphones.png",
+            "width":103,
+            "height":104
+        }
+    }
+]

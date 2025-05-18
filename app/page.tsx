@@ -1,11 +1,11 @@
-import ShowCase from "@/_components/Assets/ShowCase";
+import Categories from "@/_components/Pages/Start/Categories";
 import Hero from "@/_components/Pages/Start/Hero";
 
 const page = () => {
   return (
     <>
       <Hero />
-      <ShowCase />
+      <Categories />
     </>
   );
 };

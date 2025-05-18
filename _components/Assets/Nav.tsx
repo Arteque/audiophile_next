@@ -3,6 +3,7 @@ import Classes from "./Nav.module.scss";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
+
 const navigation = [
   {
     id: 1,
