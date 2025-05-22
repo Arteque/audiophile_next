@@ -1,9 +1,9 @@
 .mainNav {
   transition: all 0.5s;
   pointer-events: none;
-  inset-inline: 2rem;
+  inset-inline: 0;
   padding: 2rem;
-  border-radius: 0.5rem;
+  border-radius:0 0 0.5rem 0.5rem;
 }
 body[data-menu="open"] {
   .mainNav {

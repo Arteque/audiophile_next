@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 type ButtonProps = {
   href: string;
   text: ReactNode;
-  variant: "call" | "border" | "inline";
+  variant: "call" | "dark" | "border" | "inline";
   className?: string;
 };
 
@@ -14,6 +14,8 @@ const Button = ({ href, text, variant, className="", ...props }: ButtonProps) =>
     switch (variant) {
       case "call":
         return "px-[2rem] py-[1rem] bg-prime-100 text-light-100 hover:bg-prime-200";
+      case "dark":
+        return "px-[2rem] py-[1rem] bg-dark-100 text-light-100 hover:bg-prime-200";
       case "border":
         return "px-[2rem] py-[1rem] bg-transparent text-dark-100 border-dark-100 border-2 hover:bg-light-200";
       case "inline":

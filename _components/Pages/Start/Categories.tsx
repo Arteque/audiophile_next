@@ -1,14 +1,15 @@
-import CategorieItemsList from "@/_components/Assets/CategorieItemsList"
+import CategorieItemsList from "@/_components/Assets/CategorieItemsList";
+import Section from "@/_components/Assets/Section";
 const Categories = () => {
   return (
-    <section className="mt-[127px] mb-[168px]">
+    <Section>
       <div className="container">
         <div className="lg:grid lg:grid-cols-3 lg:gap-[2rem] lg:py-[4rem]">
-            <CategorieItemsList />
+          <CategorieItemsList />
         </div>
       </div>
-    </section>
-  )
-}
+    </Section>
+  );
+};
 
-export default Categories
+export default Categories;
