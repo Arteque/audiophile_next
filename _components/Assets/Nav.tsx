@@ -1,7 +1,7 @@
 "use client";
 import Classes from "./Nav.module.scss";
 import { usePathname } from "next/navigation";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Cat } from "@/types/cat";
 import Link from "next/link";
 import Image from "next/image";

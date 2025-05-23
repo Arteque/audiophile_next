@@ -18,7 +18,7 @@ const Hero = () => {
               xx99 mark ii headphones
             </span>
           </h1>
-          <Paragraph>
+          <Paragraph txtColor="light">
             Experience natural, lifelike audio and exceptional build quality
             made for the passionate music enthusiast.
           </Paragraph>
