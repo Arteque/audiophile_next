@@ -6,9 +6,9 @@ import Container from "@/_components/Assets/Container";
 const Showcase = () => {
   return (
     <Section>
-      <Container className="bg-prime-100 px-[24px] py-[55px]  bg-[url('/home/desktop/pattern-circles.svg')] bg-no-repeat bg-cover bg-position-[center_-200px]
-      md:bg-position-[center_120%]
-      lg:flex lg:items-center lg:bg-position-[-160%_0] lg:bg-size-[90%] lg:overflow-hidden lg:rounded-[8px] lg:py-0
+      <Container className="bg-prime-100 px-[24px] py-[55px] rounded-[8px] bg-[url('/home/desktop/pattern-circles.svg')] bg-no-repeat bg-cover bg-position-[center_-200px]
+      md:bg-position-[center_250%]
+      lg:flex lg:items-center lg:bg-position-[-160%_0] lg:bg-size-[90%] lg:py-0 lg:overflow-hidden
       ">
         <div className="media-container relative w-full mx-auto mb-[64px] lg:w-[35%] lg:self-end">
           <picture>

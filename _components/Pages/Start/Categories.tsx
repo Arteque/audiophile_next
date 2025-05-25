@@ -5,7 +5,7 @@ const Categories = () => {
   return (
     <Section marginTop="full" className="mb-[120px]">
       <Container>
-        <div className="lg:grid lg:grid-cols-3 lg:gap-[2rem] lg:py-[4rem]">
+        <div className="md:grid md:grid-cols-3 md:gap-[10px] lg:py-[4rem]">
           <CategorieItemsList />
         </div>
       </Container>
