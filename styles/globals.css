@@ -53,10 +53,10 @@ a, button{
   @apply block uppercase text-[14px] tracking-[10px] font-normal; 
 }
 .heading__2{
-  @apply font-bold text-[56px] tracking-[2px] pb-[25px] leading-[3.8rem] uppercase; 
+  @apply font-bold text-[56px] tracking-[2px] leading-[3.8rem] uppercase; 
 }
 .heading__3{
-  @apply font-bold text-[28px] mb-[32px] tracking-[2px] uppercase; 
+  @apply font-bold text-[28px] tracking-[2px] uppercase; 
 }
 /*Heading*/
 
