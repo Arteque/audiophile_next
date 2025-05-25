@@ -1,12 +1,12 @@
 import Button from "@/_components/Assets/Button";
 import Paragraph from "@/_components/Assets/Paragraph";
 import Section from "@/_components/Assets/Section";
-
+import Container from "@/_components/Assets/Container";
 
 const Showcase = () => {
   return (
     <Section>
-      <div className="container bg-prime-100 py-[55px]  bg-[url('/home/desktop/pattern-circles.svg')] bg-no-repeat bg-cover bg-position-[center_-200px]
+      <Container className="bg-prime-100 px-[24px] py-[55px]  bg-[url('/home/desktop/pattern-circles.svg')] bg-no-repeat bg-cover bg-position-[center_-200px]
       md:bg-position-[center_120%]
       lg:flex lg:items-center lg:bg-position-[-160%_0] lg:bg-size-[90%] lg:overflow-hidden lg:rounded-[8px] lg:py-0
       ">
@@ -25,7 +25,7 @@ const Showcase = () => {
         </div>
         <div className="lg:w-[40%]">
           <div className="max-w-[349px] text-center mx-auto lg:text-left">
-            <h2 className="font-bold text-light-100 text-[56px] tracking-[2px] pb-[25px] leading-[3.8rem] uppercase">
+            <h2 className="heading__2 text-light-100">
             ZX9 Speaker
           </h2>
           <Paragraph txtColor="light">
@@ -40,7 +40,7 @@ const Showcase = () => {
           />
           </div>
         </div>
-      </div>
+      </Container>
     </Section>
   );
 };

@@ -43,24 +43,20 @@ a, button{
   @apply text-prime-100;
 }
 /* Nav*/
-/*Container*/
-.container {
-  @apply max-w-[1110px] mx-auto;
-}
-/*Container*/
 
 /*Heading*/
 .heading_main{
-  @apply text-[36px] leading-[40px] tracking-[1.29px] uppercase font-bold;
-}
-@media (min-width: 768px) {
-  .heading_main{
-    @apply text-[56px] leading-[58px] tracking-[2px];
-  }
+  @apply text-[36px] leading-[40px] tracking-[1.29px] uppercase font-bold md:text-[56px] md:leading-[58px] md:tracking-[2px];
 }
 
 .heading_sub{
   @apply block uppercase text-[14px] tracking-[10px] font-normal; 
+}
+.heading__2{
+  @apply font-bold text-[56px] tracking-[2px] pb-[25px] leading-[3.8rem] uppercase; 
+}
+.heading__3{
+  @apply font-bold text-[28px] mb-[32px] tracking-[2px] uppercase; 
 }
 /*Heading*/
 

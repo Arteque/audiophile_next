@@ -8,7 +8,7 @@ const Hero = () => {
       className="heroSection relative min-h-[100dvh] pt-[25dvh] bg-[#191919] "
       id="heroSection"
     >
-      <div className="textContainer  container relative  z-5 px-[24px] md:px-0">
+      <div className="textContainer container  mx-auto max-w-[1110px] relative  z-5 px-[24px] md:px-0">
         <div className="mx-auto text-center lg:text-left max-w-[379px] lg:max-w-[398px] lg:mx-[unset]">
           <h1 className=" mb-[28px]">
             <Subhead className="text-light-100/40 mb-[24px]">
