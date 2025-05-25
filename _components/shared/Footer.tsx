@@ -27,7 +27,7 @@ const Footer = () => {
         </Container>
       </Section>
       <footer className="mt-[120px] bg-dark-100">
-        <Container className="text-center py-[52px_38px] md:px[40px]">
+        <Container className="text-center py-[52px_38px] md:px[40px] md:text-left">
           <Logo className="block mx-auto w-fit md:w-auto py-[52px]"/>
           <Nav variant="footer" className="mb-[48px]"/>
           <Paragraph className="text-light-100/50 font-medium">
@@ -38,7 +38,7 @@ const Footer = () => {
               Copyright 2021. All Rights Reserved
             </strong>
           </Paragraph>
-          <ul className="social flex gap-5 justify-center items-center">
+          <ul className="social flex gap-5 justify-center items-center md:w-fit">
               <li>
                 <Link href="#" target="_blank">
                   <span className="icon">
