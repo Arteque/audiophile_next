@@ -1,8 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-const Logo = () => {
+
+type LogoProps = {
+  className?: string;
+}
+const Logo = ({ className }: LogoProps) => {
   return (
-    <Link href="/" className="Logo md:w-full md:mx-[42px] lg:w-fit lg:mx-0">
+    <Link href="/" className={`Logo lg:w-fit ${className}`}>
       <Image
         src="/shared/desktop/logo.svg"
         alt="Audiphile Onlineshope Logo White"

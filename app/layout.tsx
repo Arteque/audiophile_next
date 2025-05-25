@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "../styles/globals.css";
 import Header from "@/_components/shared/Header";
+import Footer from "@/_components/shared/Footer";
 
 export const metadata: Metadata = {
   title: "Audiophile Online Shope",
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body suppressHydrationWarning className="lg:[&::after]:hidden">
         <Header />
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

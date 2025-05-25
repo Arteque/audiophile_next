@@ -4,8 +4,9 @@ import { ReactNode } from "react";
 type ParagraphProps = {
   children: ReactNode;
   txtColor ?: string;
+  className?:string;
 };
-const Paragraph = ({ children, txtColor, ...props }: ParagraphProps) => {
+const Paragraph = ({ children, txtColor, className, ...props }: ParagraphProps) => {
 
   const textStyling = () => {
     switch (txtColor) {
@@ -20,7 +21,7 @@ const Paragraph = ({ children, txtColor, ...props }: ParagraphProps) => {
 
   return (
     <p
-      className={`${textStyling()} text-[15px] leading-[25px] mb-[28px]`}
+      className={`${textStyling()} text-[15px] leading-[25px] mb-[28px] ${className}`}
       area-label="paragraph"
       {...props}
     >

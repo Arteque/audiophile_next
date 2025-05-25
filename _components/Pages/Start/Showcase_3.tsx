@@ -13,7 +13,7 @@ const Showcase_3 = () => {
                     <Image src="/home/mobile/image-earphones-yx1.jpg" alt="YX1 Earphones" width={540} height={560} className="w-full h-full object-cover" />
                 </picture>
             </div>
-            <div className="content rounded-[8px] bg-light-200 px-[24px] py-[41px] md:px-[62px] lg:px-[96.5px] lg:py-[101px]">
+            <div className="content flex flex-col justify-center rounded-[8px] bg-light-100 px-[24px] py-[41px] md:px-[62px] lg:px-[96.5px] lg:py-[101px]">
                 <h2 className="heading__3  mb-[32px] ">YX1 EARPHONES</h2>
                 <Button variant="border" text="See Product" href="/speakers/zx7" className="block w-fit" />
             </div>
