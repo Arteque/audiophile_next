@@ -1,10 +1,13 @@
+import Section from "@/_components/Assets/Section"
+import Container from "@/_components/Assets/Container"
 const page = () => {
   return (
-    <div>
-      <h1>Headphones</h1>
-      <p>Headphones are a pair of small loudspeakers that are designed to be held close to a user's ears.</p>
-    </div>
-  )
+    <Section className="page_hero bg-dark-100 mt-[unset_!important]">
+      <Container className="my-0">
+          <h2 className=" font-bold text-center py-[97px] text-light-100 text-[40px] uppercase">Headphones</h2>
+      </Container>
+    </Section>
+    )
 }
 
 export default page
