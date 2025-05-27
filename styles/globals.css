@@ -46,14 +46,14 @@ a, button{
 
 /*Heading*/
 .heading_main{
-  @apply text-[36px] leading-[40px] tracking-[1.29px] uppercase font-bold md:text-[56px] md:leading-[58px] md:tracking-[2px];
+  @apply font-bold text-[36px] uppercase leading-[58px] tracking-[2px]  md:text-[56px];
 }
 
 .heading_sub{
   @apply block uppercase text-[14px] tracking-[10px] font-normal; 
 }
 .heading__2{
-  @apply font-bold text-[56px] tracking-[2px] leading-[3.8rem] uppercase; 
+  @apply text-[56px] tracking-[2px] leading-[3.8rem] uppercase; 
 }
 .heading__3{
   @apply font-bold text-[28px] tracking-[2px] uppercase; 
@@ -70,3 +70,10 @@ a, button{
   border-radius: 8px;
 }
 /* ShowCaseProducts */
+
+
+/* Footer  */
+.footerContainer::before{
+  @apply content-[""] absolute top-0 left-1/2 -translate-x-1/2 h-[4px] w-[101px] bg-prime-100 md:left-0 md:translate-x-0;
+}
+/* Footer  */

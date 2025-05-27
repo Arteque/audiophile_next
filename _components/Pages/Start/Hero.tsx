@@ -1,6 +1,7 @@
 import Subhead from "@/_components/Assets/Subhead";
 import Button from "@/_components/Assets/Button";
 import Paragraph from "@/_components/Assets/Paragraph";
+import Container from "@/_components/Assets/Container";
 
 const Hero = () => {
   return (
@@ -8,13 +9,13 @@ const Hero = () => {
       className="heroSection relative min-h-[100dvh] pt-[25dvh] bg-[#191919] "
       id="heroSection"
     >
-      <div className="textContainer container  mx-auto max-w-[1110px] relative  z-5 px-[24px] md:px-0">
+      <Container className="relative  z-5 px-[24px] md:px-0">
         <div className="mx-auto text-center lg:text-left max-w-[379px] lg:max-w-[398px] lg:mx-[unset]">
-          <h1 className=" mb-[28px]">
+          <h1 className="mb-[28px]">
             <Subhead className="text-light-100/40 mb-[24px]">
               New Product
             </Subhead>
-            <span className="uppercase text-light-200 heading_main">
+            <span className="heading_main text-light-100">
               xx99 mark ii headphones
             </span>
           </h1>
@@ -29,7 +30,7 @@ const Hero = () => {
             className="block w-fit mx-auto lg:mx-[unset]"
           />
         </div>
-      </div>
+      </Container>
 
       <div className="mediaContainer absolute inset-0 max-w-[1410px] mx-auto">
         <picture>
