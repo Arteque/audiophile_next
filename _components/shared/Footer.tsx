@@ -1,16 +1,15 @@
-import Section from "../Assets/Section";
 import Container from "../Assets/Container";
 import Image from "next/image";
 import Paragraph from "../Assets/Paragraph";
 import Logo from "../Assets/Logo";
 import Nav from "../Assets/Nav";
 import Link from "next/link";
-import AboutSection from "./AboutSection";
+import PreFooter from "./PreFooter";
 
 const Footer = () => {
   return (
     <>
-      <AboutSection />
+      <PreFooter />
       <footer className=" bg-dark-100 mt-[120px] md:mt-[96px] lg:mt-[200px]">
         <Container
           className="footerContainer text-center relative py-[52px_38px] md:text-left

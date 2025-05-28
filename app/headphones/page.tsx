@@ -1,12 +1,11 @@
-import Section from "@/_components/Assets/Section";
-import Container from "@/_components/Assets/Container";
 import PageHero from "@/_components/shared/PageHero";
-import AboutSection from "@/_components/shared/AboutSection";
+import ItemsListing from "@/_components/Pages/headphones/ItemsListing";
+
 const page = () => {
   return (
     <>
       <PageHero />
-      <AboutSection />
+      <ItemsListing />
     </>
   );
 };
