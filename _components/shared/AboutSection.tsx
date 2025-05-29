@@ -21,23 +21,24 @@ type AboutSectionProps = {
   newArticle ?: boolean;
   call ?: boolean;
   href ?: string;
+  className ?: string;
 }
 
-const AboutSection = ({img, title, text, reverse, newArticle, call, href="/"}:AboutSectionProps) => {
+const AboutSection = ({img, title, text, reverse, newArticle, call, href="/", className=""}:AboutSectionProps) => {
   return (
-    <Section className="mt-[96px]">
+    <Section className={className}>
       <Container className={`lg:flex ${reverse ? 'lg:flex-row-reverse':'lg:flex-row'} lg:gap-[125px] lg:items-center`}>
-        <div className="media rounded-[8px] overflow-hidden lg:w-[50%] lg:h-[588px]">
+        <div className="relative media rounded-[8px] overflow-hidden lg:w-[50%] lg:h-[588px]">
           <picture>
+            {img.desktop && <source
+              sizes="(min-width: 1024px)"
+              srcSet={img.desktop}
+            />}
             {img.tablet && <source
               sizes="(min-width: 768px)"
               srcSet={img.tablet}
             />}
-            {img.tablet && <source
-              sizes="(min-width: 1024px)"
-              srcSet={img.desktop}
-            />}
-            {img.desktop && <Image
+            {img.mobile && <Image
               src={img.mobile}
               alt="Best Gear"
               width={100}

@@ -1,11 +1,11 @@
 import PageHero from "@/_components/shared/PageHero";
-import ItemsListing from "@/_components/Pages/headphones/ItemsListing";
+import Items from "@/_components/shared/Items";
 
 const page = () => {
   return (
     <>
-      <PageHero />
-      <ItemsListing />
+      <PageHero pageTitle="Headphones"/>
+      <Items category="headphones"/>
     </>
   );
 };

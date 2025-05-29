@@ -1,3 +1,4 @@
+"use client";
 import Container from "../Assets/Container";
 import Image from "next/image";
 import Paragraph from "../Assets/Paragraph";
@@ -5,10 +6,15 @@ import Logo from "../Assets/Logo";
 import Nav from "../Assets/Nav";
 import Link from "next/link";
 import PreFooter from "./PreFooter";
-
+import Categories from "../Pages/Start/Categories";
+import { usePathname } from "next/navigation";
 const Footer = () => {
+  const router = usePathname();
+  const notHome = router !== '/'
+
   return (
     <>
+      {notHome && <Categories />}
       <PreFooter />
       <footer className=" bg-dark-100 mt-[120px] md:mt-[96px] lg:mt-[200px]">
         <Container
@@ -41,8 +47,10 @@ const Footer = () => {
             our demo facility - we’re open 7 days a week.
           </Paragraph>
 
-          <Paragraph className="my-[52px_48px] md:my-[0] text-light-100/50
-          lg:row-start-3">
+          <Paragraph
+            className="my-[52px_48px] md:my-[0] text-light-100/50
+          lg:row-start-3"
+          >
             <strong>Copyright 2021. All Rights Reserved</strong>
           </Paragraph>
           <ul
