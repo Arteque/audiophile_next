@@ -60,7 +60,6 @@ const page =  () => {
                 singleView
                 price={productDetails.price}
                 maxAmount={5}
-                addToCart={addToCartHandler}
             />
         }
   </>
