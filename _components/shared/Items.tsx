@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Product } from "@/types/products";
 import AboutSection from "@/_components/shared/AboutSection";
 
+
 type ItemsProps = {
   category:string;
 }
@@ -19,13 +20,8 @@ const Items = ({category}:ItemsProps) => {
           return b.name.localeCompare(a.name)
         })
         setData(sorted);
-        console.log(data);
       });
   }, []);
-
-  useEffect(() => {
-    console.log("Filtered data: ", data);
-  }, [data]);
 
   return (
     data &&
@@ -42,7 +38,9 @@ const Items = ({category}:ItemsProps) => {
         mobile: item.image.mobile,
       }}
       call
-      href={`/products:[${item.name}]`}
+      singleView
+      price={item.price}
+      slug={encodeURI(item.name)}
       className="my-[64px_120px_!important] lg:my-[160px_!important]"
       />
     ))
