@@ -7,9 +7,10 @@ type ButtonProps = {
   text: ReactNode;
   variant: "call" | "dark" | "border" | "inline";
   className?: string;
+  onClick ?: (e:React.MouseEvent<HTMLAnchorElement>) => void;
 };
 
-const Button = ({ href, text, variant, className="", ...props }: ButtonProps) => {
+const Button = ({ href, text, variant, className="", onClick, ...props }: ButtonProps) => {
   const buttonType = () => {
     switch (variant) {
       case "call":
@@ -29,6 +30,7 @@ const Button = ({ href, text, variant, className="", ...props }: ButtonProps) =>
     <Link
       className={`uppercase text-[13px] font-bold ${buttonType()} ${className}`}
       href={href}
+      onClick={onClick}
       {...props}
     >
       <span className="text">{text}</span>

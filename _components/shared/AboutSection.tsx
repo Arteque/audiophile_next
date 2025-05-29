@@ -26,7 +26,8 @@ type AboutSectionProps = {
   slug?: string;
   singleView?: boolean;
   price?: number;
-  amount?: number;
+  maxAmount?: number;
+  addToCart ?: () => void;
 };
 
 const AboutSection = ({
@@ -40,19 +41,26 @@ const AboutSection = ({
   slug,
   singleView,
   price,
-  amount,
+  maxAmount,
+  addToCart
 }: AboutSectionProps) => {
   const [productAmount, setProductAmount] = useState<number>(0);
-
+  const [isMaxAmount, setIsMaxAmount] = useState<boolean>(false);
+  const [isMinAmount, setIsMinAmount] = useState<boolean>(false);
   const addProductAmountHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setProductAmount((prev) => prev + 1);
-    console.log(productAmount);
+    e.preventDefault();
+    setProductAmount((prev) => (prev < maxAmount! ? prev + 1 : prev));
   };
 
   const delProductAmountHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     setProductAmount((prev) => (prev > 0 ? prev - 1 : 0));
-    console.log(productAmount);
+    
   };
+  useEffect(() => {
+  setIsMaxAmount(productAmount >= maxAmount!);
+  setIsMinAmount(productAmount <= 0)
+}, [productAmount, maxAmount]);
+
 
   return (
     <Section className={className}>
@@ -80,11 +88,13 @@ const AboutSection = ({
             )}
           </picture>
         </div>
-        <div className="content lg:w-[50%] lg:text-left">
+        <div
+          className={`content ${
+            singleView ? "text-left" : "text-center"
+          } lg:w-[50%] `}
+        >
           <h2 className="heading__3 my-[40px_32px]">
-            {newArticle && (
-              <Subhead className="text-prime-100">New Product</Subhead>
-            )}
+            {newArticle && <Subhead className="text-prime-100">New Product</Subhead>}
             {title}
           </h2>
           <Paragraph txtColor="text-light-200">{text}</Paragraph>
@@ -100,15 +110,19 @@ const AboutSection = ({
               <div className="price my-[32px] font-bold text-[18px] tracking-[1.29px]">
                 <Paragraph>{Currency(price)}</Paragraph>
               </div>
-              <div className="addToCart flex items-center mx-auto gap-[1rem] lg:mx-[unset]">
+              <div className="addToCart w-fit h-[48px] flex gap-[1rem] lg:mx-[unset]">
                 <div className="amountContainer bg-light-100 w-fit flex items-center justify-center">
-                 <button
+                  <button
                     onClick={delProductAmountHandler}
-                    className="block p-[15px] text-center"
+                    className="block w-[48px] h-full text-center hover:bg-dark-100/25"
+                    disabled={isMinAmount}
                   >
                     -
                   </button>
-                  <label htmlFor="amountInput" className="block p-[15px]">
+                  <label
+                    htmlFor="amountInput"
+                    className="w-[48px] h-full text-center hover:bg-dark-100/25 flex items-center justify-center"
+                  >
                     {productAmount}
                     <input
                       className="hidden"
@@ -116,16 +130,24 @@ const AboutSection = ({
                       name="amountInput"
                       id="amountInput"
                       value={productAmount}
+                      onChange={(e) => console.log(e)}
                     />
                   </label>
-                   <button
+                  <button
                     onClick={addProductAmountHandler}
-                    className="block p-[15px]"
+                    className="block w-[48px] h-full text-center hover:bg-dark-100/25"
+                    disabled={isMaxAmount}
                   >
                     +
                   </button>
                 </div>
-                <Button variant="call" text="Add to cart" href="/" className="text-light-200" />
+                <Button
+                  variant="call"
+                  text="Add to cart"
+                  href="/"
+                  className="text-light-200"
+                  onClick={addToCart}
+                />
               </div>
             </>
           )}

@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, EventHandler } from "react";
 import AboutSection from "@/_components/shared/AboutSection";
 import PageHero from "@/_components/shared/PageHero";
 import { Product } from "@/types/products";
@@ -16,6 +16,10 @@ const page =  () => {
  const [loading, setLoading] = useState<boolean>(false)
 
 
+ const addToCartHandler = (e:React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    console.log(e) 
+ }
 
  useEffect(() => {
     if(!productName) return
@@ -46,6 +50,7 @@ const page =  () => {
         {
             <AboutSection
                 title={productDetails?.name}
+                newArticle = {productDetails.new}
                 img={{
                     tablet:productDetails?.image.tablet,
                     desktop:productDetails?.image.desktop,
@@ -54,6 +59,8 @@ const page =  () => {
                 text = {productDetails?.description}
                 singleView
                 price={productDetails.price}
+                maxAmount={5}
+                addToCart={addToCartHandler}
             />
         }
   </>
