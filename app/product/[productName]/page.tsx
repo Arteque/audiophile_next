@@ -52,7 +52,8 @@ const page =  () => {
                     mobile:productDetails?.image.mobile,
                 }}
                 text = {productDetails?.description}
-
+                singleView
+                price={productDetails.price}
             />
         }
   </>

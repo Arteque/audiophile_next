@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
 import Section from "../Assets/Section";
 import Container from "../Assets/Container";
@@ -26,7 +26,7 @@ type AboutSectionProps = {
   slug?: string;
   singleView?: boolean;
   price?: number;
-  amount?:number;
+  amount?: number;
 };
 
 const AboutSection = ({
@@ -40,20 +40,19 @@ const AboutSection = ({
   slug,
   singleView,
   price,
-  amount
+  amount,
 }: AboutSectionProps) => {
+  const [productAmount, setProductAmount] = useState<number>(0);
 
-  const [productAmount, setProductAmount] = useState<number>(0)
+  const addProductAmountHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setProductAmount((prev) => prev + 1);
+    console.log(productAmount);
+  };
 
-  const addProductAmountHandler = (e:React.MouseEvent<HTMLButtonElement>) => {
-    setProductAmount(prev => prev+1)
-    console.log(productAmount)
-  }
-
-  const delProductAmountHandler = (e:React.MouseEvent<HTMLButtonElement>) => {
-    setProductAmount(prev => prev > 0 ? prev-1:0)
-    console.log(productAmount)
-  }
+  const delProductAmountHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setProductAmount((prev) => (prev > 0 ? prev - 1 : 0));
+    console.log(productAmount);
+  };
 
   return (
     <Section className={className}>
@@ -81,7 +80,7 @@ const AboutSection = ({
             )}
           </picture>
         </div>
-        <div className="content text-center lg:w-[50%] lg:text-left">
+        <div className="content lg:w-[50%] lg:text-left">
           <h2 className="heading__3 my-[40px_32px]">
             {newArticle && (
               <Subhead className="text-prime-100">New Product</Subhead>
@@ -101,19 +100,32 @@ const AboutSection = ({
               <div className="price my-[32px] font-bold text-[18px] tracking-[1.29px]">
                 <Paragraph>{Currency(price)}</Paragraph>
               </div>
-              <div className="addToCart">
-                <div className="amountContainer bg-light-100 w-fit flex items-center justify-center mx-auto">
-                  <button onClick={addProductAmountHandler}
-                    className="block p-[15px]"
-                  >+</button>
+              <div className="addToCart flex items-center mx-auto gap-[1rem] lg:mx-[unset]">
+                <div className="amountContainer bg-light-100 w-fit flex items-center justify-center">
+                 <button
+                    onClick={delProductAmountHandler}
+                    className="block p-[15px] text-center"
+                  >
+                    -
+                  </button>
                   <label htmlFor="amountInput" className="block p-[15px]">
                     {productAmount}
-                    <input className="hidden" type="number" name="amountInput" id="amountInput" value={productAmount}/>
+                    <input
+                      className="hidden"
+                      type="number"
+                      name="amountInput"
+                      id="amountInput"
+                      value={productAmount}
+                    />
                   </label>
-                  <button onClick={delProductAmountHandler}
-                  className="block p-[15px] text-center"
-                  >-</button>
+                   <button
+                    onClick={addProductAmountHandler}
+                    className="block p-[15px]"
+                  >
+                    +
+                  </button>
                 </div>
+                <Button variant="call" text="Add to cart" href="/" className="text-light-200" />
               </div>
             </>
           )}

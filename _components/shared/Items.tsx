@@ -38,7 +38,6 @@ const Items = ({category}:ItemsProps) => {
         mobile: item.image.mobile,
       }}
       call
-      singleView
       price={item.price}
       slug={encodeURI(item.name)}
       className="my-[64px_120px_!important] lg:my-[160px_!important]"
