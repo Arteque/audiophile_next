@@ -42,7 +42,8 @@ const AboutSection = ({
   singleView,
   price,
   maxAmount,
-  addToCart
+  addToCart,
+  ...props
 }: AboutSectionProps) => {
   const [productAmount, setProductAmount] = useState<number>(0);
   const [isMaxAmount, setIsMaxAmount] = useState<boolean>(false);
@@ -63,7 +64,7 @@ const AboutSection = ({
 
 
   return (
-    <Section className={className}>
+    <Section className={className} {...props}>
       <Container
         className={`lg:flex ${
           reverse ? "lg:flex-row-reverse" : "lg:flex-row"
