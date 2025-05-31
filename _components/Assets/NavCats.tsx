@@ -4,6 +4,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Section from "./Section";
+import Container from "./Container";
 
 const NavCats = () => {
   const pathname = usePathname();
@@ -28,7 +30,7 @@ const NavCats = () => {
   useEffect(() => {
     console.log(categories);
   }, [categories]);
-
+  if(loading) return <Section><Container><p className="text-center">Loading</p></Container></Section>
   return (
     <>
       {categories.slice(1).map((item, index) => (

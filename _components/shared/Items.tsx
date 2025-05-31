@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Product } from "@/types/products";
 import AboutSection from "@/_components/shared/AboutSection";
 
-
 type ItemsProps = {
   category:string;
 }
@@ -22,6 +21,21 @@ const Items = ({category}:ItemsProps) => {
         setData(sorted);
       });
   }, []);
+
+
+useEffect(() => {
+  fetch("/api/categories/category/"+category)
+  .then(res => res.json())
+  .then(data => {
+    console.log(data)
+  })
+  .catch(err => console.log("Single Category fetching error: ",err))
+  
+}, [])
+
+useEffect(() => {
+ console.log(data)
+},[data])
 
   return (
     data &&
