@@ -24,7 +24,7 @@ const Items = ({category}:ItemsProps) => {
 
 
 useEffect(() => {
-  fetch("/api/categories/category/"+category)
+  fetch("/api/search/search")
   .then(res => res.json())
   .then(data => {
     console.log(data)
