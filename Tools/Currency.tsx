@@ -1,5 +1,5 @@
-const Currency = (cur:number) => {
-    const price = Intl.NumberFormat("us-US",{style:"currency",currency:"usd"}).format(cur)
+const Currency = (cur:number, currency:string) => {
+    const price = Intl.NumberFormat(currency,{style:"currency",currency:currency}).format(cur)
     return price
 }
 

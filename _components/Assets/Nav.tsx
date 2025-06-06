@@ -29,7 +29,7 @@ const Nav = ({ className, variant }: NavProps) => {
             Home
           </Link>
         </li>
-        <NavCats />
+        {/* <NavCats /> */}
       </ul>
     </nav>
   ) : (

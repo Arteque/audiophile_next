@@ -6,7 +6,7 @@ const Categories = () => {
     <Section marginTop="full" className="mb-[120px]">
       <Container>
         <div className="md:grid md:grid-cols-3 md:gap-[10px] lg:py-[4rem]">
-          <CategorieItemsList />
+          {/* <CategorieItemsList /> */}
         </div>
       </Container>
     </Section>

@@ -14,7 +14,7 @@ const NavCats = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("/api/categories/page")
+    fetch("/api/navigation")
       .then((res) => res.json())
       .then((data) => {
         setCategories(data.elements || []);

@@ -2,7 +2,7 @@ import PageHero from "@/_components/shared/PageHero";
 import Section from "@/_components/Assets/Section";
 import Container from "@/_components/Assets/Container";
 const page = async () => {
-  const resp = await fetch("https://shop.artecke.de/store-api/category", {
+  const resp = await fetch("api/nagivation/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
