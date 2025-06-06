@@ -27,7 +27,7 @@ type AboutSectionProps = {
   singleView?: boolean;
   price?: number;
   maxAmount?: number;
-  addToCart ?: () => void;
+  addToCart?: () => void;
 };
 
 const AboutSection = ({
@@ -55,13 +55,11 @@ const AboutSection = ({
 
   const delProductAmountHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     setProductAmount((prev) => (prev > 0 ? prev - 1 : 0));
-    
   };
   useEffect(() => {
-  setIsMaxAmount(productAmount >= maxAmount!);
-  setIsMinAmount(productAmount <= 0)
-}, [productAmount, maxAmount]);
-
+    setIsMaxAmount(productAmount >= maxAmount!);
+    setIsMinAmount(productAmount <= 0);
+  }, [productAmount, maxAmount]);
 
   return (
     <Section className={className} {...props}>
@@ -95,7 +93,9 @@ const AboutSection = ({
           } lg:w-[50%] `}
         >
           <h2 className="heading__3 my-[40px_32px]">
-            {newArticle && <Subhead className="text-prime-100">New Product</Subhead>}
+            {newArticle && (
+              <Subhead className="text-prime-100">New Product</Subhead>
+            )}
             {title}
           </h2>
           <Paragraph txtColor="text-light-200">{text}</Paragraph>
@@ -109,7 +109,7 @@ const AboutSection = ({
           {singleView && price !== undefined && (
             <>
               <div className="price my-[32px] font-bold text-[18px] tracking-[1.29px]">
-                <Paragraph>{Currency(price)}</Paragraph>
+                <Paragraph>{Currency(price, "USD")}</Paragraph>
               </div>
               <div className="addToCart w-fit h-[48px] flex gap-[1rem] lg:mx-[unset]">
                 <div className="amountContainer bg-light-100 w-fit flex items-center justify-center">
