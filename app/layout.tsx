@@ -23,7 +23,7 @@ export default function RootLayout({
       <body suppressHydrationWarning className="lg:[&::after]:hidden">
         <Header />
         <main>{children}</main>
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );

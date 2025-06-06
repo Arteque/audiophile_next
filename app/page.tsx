@@ -8,7 +8,7 @@ const page = () => {
   return (
     <>
       <Hero />
-      {/* <Categories /> */}
+      <Categories />
       <Showcase />
       <Showcase_2 />
       <Showcase_3 />

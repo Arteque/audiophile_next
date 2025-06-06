@@ -1,14 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Section from "./Section";
 import Container from "./Container";
 
 const NavCats = () => {
-  const pathname = usePathname();
+  const path = useParams();
+  const slug = String(path?.slug).toLowerCase().trim();
   const [navigation, setNavigation] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -25,6 +26,7 @@ const NavCats = () => {
       .finally(() => {
         setLoading(false);
       });
+    console.log(slug);
   }, []);
 
   if (loading)
@@ -46,9 +48,7 @@ const NavCats = () => {
               .toLocaleLowerCase()
               .trim()}?id=${item.id}`}
             className={`${
-              "/" + item.name.trim().toLocaleLowerCase() === pathname
-                ? "active"
-                : ""
+              slug === String(item.name).toLowerCase() ? "active" : ""
             } text-center  w-full text-[13px] leading-[25px] tracking-[2px] font-bold block p-1 uppercase lg:p-0 transition-all duration-[0.3s] lg:text-light-100/50 lg:hover:text-light-100 `}
           >
             <span className="icon lg:hidden">

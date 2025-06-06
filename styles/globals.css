@@ -35,45 +35,45 @@ button {
   cursor: pointer;
   border: none;
 }
-a, button{
+a,
+button {
   transition: all 0.3s;
 }
 /* Nav*/
-.active{
+.active {
   @apply text-prime-100;
 }
 /* Nav*/
 
 /*Heading*/
-.heading_main{
+.heading_main {
   @apply font-bold text-[36px] uppercase leading-[58px] tracking-[2px]  md:text-[56px];
 }
 
-.heading_sub{
-  @apply block uppercase text-[14px] tracking-[10px] font-normal; 
+.heading_sub {
+  @apply block uppercase text-[14px] tracking-[10px] font-normal;
 }
-.heading__2{
-  @apply text-[56px] tracking-[2px] leading-[3.8rem] uppercase; 
+.heading__2 {
+  @apply text-[56px] tracking-[2px] leading-[3.8rem] uppercase;
 }
-.heading__3{
-  @apply font-bold text-[28px] tracking-[2px] uppercase lg:text-[40px]; 
+.heading__3 {
+  @apply font-bold text-[28px] tracking-[2px] uppercase md:text-[40px] md:leading-[44px] md:tracking-[1.43px];
 }
 /*Heading*/
 
 /* ShowCaseProducts */
-.productCard::before{
-  content:"";
-  position:absolute;
+.productCard::before {
+  content: "";
+  position: absolute;
   inset: 25% 0 0 0;
-  background: #F1F1F1F1;
+  background: #f1f1f1f1;
   z-index: -1;
   border-radius: 8px;
 }
 /* ShowCaseProducts */
 
-
 /* Footer  */
-.footerContainer::before{
+.footerContainer::before {
   @apply content-[""] absolute top-0 left-1/2 -translate-x-1/2 h-[4px] w-[101px] bg-prime-100 md:left-0 md:translate-x-0;
 }
 /* Footer  */
