@@ -9,15 +9,15 @@ import Container from "./Container";
 
 const NavCats = () => {
   const pathname = usePathname();
-  const [categories, setCategories] = useState<any[]>([]);
+  const [navigation, setNavigation] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
-    fetch("/api/navigation")
+    fetch(process.env.NEXT_PUBLIC_SITE_URL + "/api/navigation")
       .then((res) => res.json())
       .then((data) => {
-        setCategories(data.elements || []);
+        setNavigation(data || []);
       })
       .catch((err) => {
         console.error(err);
@@ -27,23 +27,36 @@ const NavCats = () => {
       });
   }, []);
 
-  useEffect(() => {
-    console.log(categories);
-  }, [categories]);
-  if(loading) return <Section><Container><p className="text-center">Loading</p></Container></Section>
+  if (loading)
+    return (
+      <Section>
+        <Container>
+          <p className="text-center">Loading</p>
+        </Container>
+      </Section>
+    );
   return (
     <>
-      {categories.slice(1).map((item, index) => (
+      {navigation.map((item, index) => (
         <li key={index} className={`mainNav__item`}>
           <Link
-            href={`/${encodeURI(item.name).toLocaleLowerCase().trim()}`}
-            className={`${"/"+(item.name).trim().toLocaleLowerCase() === pathname  ? "active" : ""
+            href={`${process.env.NEXT_PUBLIC_SITE_URL}/products/${encodeURI(
+              item.name
+            )
+              .toLocaleLowerCase()
+              .trim()}?id=${item.id}`}
+            className={`${
+              "/" + item.name.trim().toLocaleLowerCase() === pathname
+                ? "active"
+                : ""
             } text-center  w-full text-[13px] leading-[25px] tracking-[2px] font-bold block p-1 uppercase lg:p-0 transition-all duration-[0.3s] lg:text-light-100/50 lg:hover:text-light-100 `}
           >
             <span className="icon lg:hidden">
               {
                 <Image
-                  src={`/shared/desktop/image-category-thumbnail-${item.name.trim().toLocaleLowerCase()}.png`}
+                  src={`/shared/desktop/image-category-thumbnail-${item.name
+                    .trim()
+                    .toLocaleLowerCase()}.png`}
                   alt={item.name}
                   width={100}
                   height={100}

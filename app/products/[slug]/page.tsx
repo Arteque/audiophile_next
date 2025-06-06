@@ -1,28 +1,45 @@
-import { Params } from "next/dist/server/request/params";
-import { notFound } from "next/navigation";
+"use client";
 
-type productPageProps = {
-  params:{
-    slug:string
-  }
-}
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const productPage = async ({params}:productPageProps) => {
-  
-  const  slug = params.slug
-  console.log(slug)
+const ProductPage = () => {
+  const searchParams = useSearchParams();
+  const id = searchParams?.get("id");
 
-  const URL = `/api/navigation`;
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  try {
-    const resp = await fetch(URL);
-    const data = await resp.json();
-    console.log("the data is :",data);
-  } catch (err) {
-    console.log(err);
-  }
+  useEffect(() => {
+    if (!id) return;
 
-  return <h1>{slug}</h1>;
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`/api/productlisting?id=${id}`);
+        const data = await response.json();
+        setProducts(data.elements || []);
+      } catch (err) {
+        console.error("Failed to fetch products:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [id]);
+
+  if (loading) return <p>Loading...</p>;
+
+  return (
+    <div>
+      <h1>Products in Category</h1>
+      <ul>
+        {products.map((p) => (
+          <li key={p.id}>{p.translated?.name || "Unnamed Product"}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
-export default productPage;
+export default ProductPage;
