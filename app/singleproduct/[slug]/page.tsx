@@ -29,13 +29,13 @@ const page = () => {
       try {
         const resp = await fetch(`/api/single?id=${id}`);
         const data: ProductApiResponse = await resp.json();
-        console.log(data.product);
+        console.log(data);
 
         setProductDetails({
           name: data.product.name,
-          img: data.product.cover.media.url,
-          imgs: data.product.cover.media.thumbnails,
-          imgId: data.product.cover.media.id,
+          cover: data.product.cover.media.url,
+          coverName: data.product.cover.media.fileName,
+          media: data.product.media,
           stock: data.product.availableStock,
           teaser: data.product.customFields.custom_text_,
           description: sanitizeHtml(data.product.description),
@@ -85,7 +85,7 @@ const page = () => {
             <div className="product-view__media">
               <Image
                 src={
-                  productDetails.img || "/shared/desktop/image-best-gear.jpg"
+                  productDetails.cover || "/shared/desktop/image-best-gear.jpg"
                 }
                 alt={productDetails.name || "Default Text"}
                 width={800}
@@ -108,7 +108,12 @@ const page = () => {
                 {productDetails.teaser}
               </Paragraph>
               <p className="mb-[31px] font-bold text-[18px] tracking-[1.29px]">
-                {Currency(productDetails.price, "USD")}
+                {Currency(
+                  amount > 0
+                    ? productDetails.price * amount
+                    : productDetails.price,
+                  "USD"
+                )}
               </p>
               <div className="buy-container flex gap-[1rem]">
                 <div className="flex flex-row flex-nowrap gap-1 items-center bg-dark-100/10 w-fit">
@@ -117,7 +122,13 @@ const page = () => {
                     onClick={amountBtnSubstracterHandler}
                     disabled={amount <= 0 ? true : false}
                   />
-                  <p className="w-48px flex items-center justify-center">
+                  <p
+                    className={`w-[48px] text-[13px] font-bold tracking-[1px] flex items-center justify-center ${
+                      amount >= productDetails.stock || amount <= 0
+                        ? "text-red-600"
+                        : "text-dark-100/50"
+                    }`}
+                  >
                     {amount}{" "}
                   </p>
                   <AmountBtn
@@ -167,30 +178,26 @@ const page = () => {
               </div>
             )}
           </div>
-          <div className="product-images-container mt-[88px]">
-            {productDetails.imgs &&
-              productDetails.imgs.map(
-                ({
-                  id,
-                  url,
-                  height,
-                  width,
-                }: {
-                  id: string;
-                  url: string;
-                  height: number;
-                  width: number;
-                }) => (
-                  <Image
-                    src={url}
-                    alt={productDetails.name}
-                    key={id}
-                    width={width}
-                    height={height}
-                  />
-                )
+          {productDetails.media && (
+            <div className="product-images-container mt-[88px] flex flex-col  gap-[1rem]">
+              {productDetails.media.map(
+                (item: any) =>
+                  item.media.fileName !== productDetails.coverName && (
+                    <Image
+                      src={item.media.url}
+                      alt={
+                        item.media.alt ||
+                        item.media.title ||
+                        productDetails.name + " " + item.media.fileName
+                      }
+                      key={item.id}
+                      width={item.media.metaData.width}
+                      height={item.media.metaData.height}
+                    />
+                  )
               )}
-          </div>
+            </div>
+          )}
         </Container>
       </Section>
     </>

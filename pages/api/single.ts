@@ -13,7 +13,14 @@ export default async function handler(
   }
 
   try {
-    const data = await shopwareFetch(`product/${productId}`, "POST");
+    const data = await shopwareFetch(`product/${productId}`, "POST", {
+      body: JSON.stringify({
+        ids: [productId],
+        associations: {
+          media: {},
+        },
+      }),
+    });
 
     if (!data) {
       return res
