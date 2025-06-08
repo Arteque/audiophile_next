@@ -59,6 +59,14 @@ button {
 .heading__3 {
   @apply font-bold text-[28px] tracking-[2px] uppercase md:text-[40px] md:leading-[44px] md:tracking-[1.43px];
 }
+.heading__4 {
+  @apply text-[24px] tracking-[.86px] leading-[36px] font-bold md:font-normal md:text-[2rem] md:tracking-[1.14px];
+}
+.paragraph {
+  p {
+    @apply text-[15px] leading-[25px] font-medium mb-[2rem];
+  }
+}
 /*Heading*/
 
 /* ShowCaseProducts */

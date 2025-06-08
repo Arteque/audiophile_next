@@ -121,6 +121,17 @@ const page = () => {
               </div>
             </div>
           </div>
+          <div className="product-features-container mt-[88px]">
+            <div className="product-features__features">
+              <h2 className="heading__4 mb-[24px]">Features</h2>
+              <div
+                className="__features__text paragraph text-dark-100 opacity-50"
+                dangerouslySetInnerHTML={{
+                  __html: sanitizeHtml(productDetails.description),
+                }}
+              />
+            </div>
+          </div>
         </Container>
       </Section>
     </>
