@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import CategorieItem from "./CategorieItem";
+import Loading from "@/Tools/Loading";
 
 const CategorieItemsList = () => {
   const [cats, setCats] = useState<any>([]);
@@ -22,16 +23,7 @@ const CategorieItemsList = () => {
     fetchCats();
   }, []);
 
-  useEffect(() => {
-    console.log(cats);
-  }, [cats]);
-
-  if (loading)
-    return (
-      <p className="text-center text-dark-100/80 font-bold mx-auto w-fit">
-        Loading...
-      </p>
-    );
+  if (loading) return <Loading />;
   if (!cats) return <p>Something went wrong! Reload the page please!</p>;
   if (cats.length === 0) return <p>No categories found</p>;
   return (

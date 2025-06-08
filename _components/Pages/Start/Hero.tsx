@@ -2,15 +2,19 @@ import Subhead from "@/_components/Assets/Subhead";
 import Button from "@/_components/Assets/Button";
 import Paragraph from "@/_components/Assets/Paragraph";
 import Container from "@/_components/Assets/Container";
-
+import Image from "next/image";
 const Hero = () => {
   return (
     <section
-      className="heroSection relative min-h-[100dvh] pt-[25dvh] bg-[#191919] "
+      className="heroSection relative py-[10svh] bg-[#191919] "
       id="heroSection"
     >
-      <Container className="relative  z-5 px-[24px] md:px-0">
-        <div className="mx-auto text-center lg:text-left max-w-[379px] lg:max-w-[398px] lg:mx-[unset]">
+      <Container className="relative lg:flex lg:justify-between">
+        <div
+          className="relative z-10 mx-auto text-center lg:text-left max-w-[379px] lg:max-w-[398px] lg:mx-[unset]
+         
+        "
+        >
           <h1 className="mb-[28px]">
             <Subhead className="text-light-100/40 mb-[24px]">
               New Product
@@ -30,27 +34,17 @@ const Hero = () => {
             className="block w-fit mx-auto lg:mx-[unset]"
           />
         </div>
-      </Container>
-
-      <div className="mediaContainer absolute inset-0 max-w-[1410px] mx-auto">
-        <picture>
-          <source
-            media="(min-width:1024px)"
-            srcSet="/home/desktop/image-hero.jpg"
-          />
-          <source
-            media="(min-width:768px)"
-            srcSet="/home/tablet/image-header.jpg"
-          />
-          <img
-            src="/home/mobile/image-header.jpg"
+        <div className="absolute top-[50%] translate-y-[-50%] lg:right-0">
+          <Image
+            src="/home/desktop/image-hero.jpg"
             alt="xx99 mark ii headphones"
-            className="block w-full mx-auto h-full object-cover translate-y-[-10%]"
+            width={1000}
+            height={1000}
+            className="w-full h-auto block"
           />
-        </picture>
-      </div>
+        </div>
+      </Container>
     </section>
-    
   );
 };
 

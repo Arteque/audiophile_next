@@ -27,7 +27,7 @@ const Nav = ({ className, variant }: NavProps) => {
   return variant === "main" ? (
     <nav
       className={`${Classes.mainNav} translate-y-[-20px] mainNav absolute top-full text-dark-100 bg-light-100 opacity-0 
-            lg:opacity-100 lg:relative lg:top-0 lg:bg-transparent lg:[pointer-events:auto_!important]
+            lg:translate-y-[0] lg:opacity-100 lg:relative lg:top-0 lg:bg-transparent lg:[pointer-events:auto_!important]
             ${className}
             `}
     >

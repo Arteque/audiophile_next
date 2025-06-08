@@ -70,17 +70,6 @@ button {
 }
 /*Heading*/
 
-/* ShowCaseProducts */
-.productCard::before {
-  content: "";
-  position: absolute;
-  inset: 25% 0 0 0;
-  background: #f1f1f1f1;
-  z-index: -1;
-  border-radius: 8px;
-}
-/* ShowCaseProducts */
-
 /* Footer  */
 .footerContainer::before {
   @apply content-[""] absolute top-0 left-1/2 -translate-x-1/2 h-[4px] w-[101px] bg-prime-100 md:left-0 md:translate-x-0;

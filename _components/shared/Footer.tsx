@@ -10,12 +10,12 @@ import Categories from "../Pages/Start/Categories";
 import { usePathname } from "next/navigation";
 const Footer = () => {
   const router = usePathname();
-  const notHome = router !== '/'
+  const notHome = router !== "/";
 
   return (
     <>
       {notHome && <Categories />}
-      <PreFooter />
+      <PreFooter className="mt-[120px]" />
       <footer className=" bg-dark-100 mt-[120px] md:mt-[96px] lg:mt-[200px]">
         <Container
           className="footerContainer text-center relative py-[52px_38px] md:text-left
@@ -65,6 +65,7 @@ const Footer = () => {
                     alt="Facebook Icon"
                     width={24}
                     height={24}
+                    className="h-auto"
                   />
                 </span>
               </Link>
@@ -77,6 +78,7 @@ const Footer = () => {
                     alt="Instagram Icon"
                     width={24}
                     height={24}
+                    className="h-auto"
                   />
                 </span>
               </Link>
@@ -89,6 +91,7 @@ const Footer = () => {
                     alt="Twitter Icon"
                     width={24}
                     height={24}
+                    className="h-auto"
                   />
                 </span>
               </Link>
