@@ -5,22 +5,31 @@ import { ReactNode } from "react";
 type ButtonProps = {
   href: string;
   text: ReactNode;
-  variant: "call" | "dark" | "border" | "inline";
+  variant: "default" | "call" | "dark" | "border" | "inline";
   className?: string;
-  onClick ?: (e:React.MouseEvent<HTMLAnchorElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 };
 
-const Button = ({ href, text, variant, className="", onClick, ...props }: ButtonProps) => {
+const Button = ({
+  href,
+  text,
+  variant,
+  className = "",
+  onClick,
+  ...props
+}: ButtonProps) => {
   const buttonType = () => {
     switch (variant) {
+      case "default":
+        return "my-[1rem_24px] text-dark-100/50 text-[15px] font-medium leading-[25px]";
       case "call":
-        return "px-[2rem] py-[1rem] bg-prime-100 text-light-100 hover:bg-prime-200";
+        return "uppercase text-[13px] font-bold px-[2rem] py-[1rem] bg-prime-100 text-light-100 hover:bg-prime-200";
       case "dark":
-        return "px-[2rem] py-[1rem] bg-dark-100 text-light-100 hover:bg-prime-200";
+        return "uppercase text-[13px] font-bold px-[2rem] py-[1rem] bg-dark-100 text-light-100 hover:bg-prime-200";
       case "border":
-        return "px-[2rem] py-[1rem] bg-transparent text-dark-100 border-dark-100 border-2 hover:bg-light-200";
+        return "uppercase text-[13px] font-bold px-[2rem] py-[1rem] bg-transparent text-dark-100 border-dark-100 border-2 hover:bg-light-200";
       case "inline":
-        return "text-dark-100/50 flex gap-[13px] items-center hover:text-prime-100 w-fit";
+        return "uppercase text-[13px] font-bold text-dark-100/50 flex gap-[13px] items-center hover:text-prime-100 w-fit";
       default:
         return "";
     }
@@ -28,7 +37,7 @@ const Button = ({ href, text, variant, className="", onClick, ...props }: Button
 
   return (
     <Link
-      className={`uppercase text-[13px] font-bold ${buttonType()} ${className}`}
+      className={`${buttonType()} ${className}`}
       href={href}
       onClick={onClick}
       {...props}
