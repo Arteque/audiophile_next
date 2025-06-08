@@ -63,6 +63,7 @@ button {
   @apply text-[24px] tracking-[.86px] leading-[36px] font-bold md:font-normal md:text-[2rem] md:tracking-[1.14px];
 }
 .paragraph {
+  @apply text-[15px] leading-[25px] font-medium mb-[2rem];
   p {
     @apply text-[15px] leading-[25px] font-medium mb-[2rem];
   }

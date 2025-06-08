@@ -24,22 +24,25 @@ const page = () => {
 
   useEffect(() => {
     if (!slug) return;
-    console.log(id);
-    console.log("slug", slug);
+
     const fetchProdutDetais = async () => {
       try {
         const resp = await fetch(`/api/single?id=${id}`);
         const data: ProductApiResponse = await resp.json();
-        console.log(data);
+        console.log(data.product);
+
         setProductDetails({
           name: data.product.name,
           img: data.product.cover.media.url,
+          imgs: data.product.cover.media.thumbnails,
+          imgId: data.product.cover.media.id,
           stock: data.product.availableStock,
           teaser: data.product.customFields.custom_text_,
           description: sanitizeHtml(data.product.description),
           productNumber: data.product.productNumber,
           isNew: data.product.isNew,
           price: data.product.calculatedPrice.unitPrice,
+          inBox: JSON.parse(data.product.customFields.custom_item),
         });
       } catch (err) {
         console.log("Error :", err);
@@ -61,12 +64,11 @@ const page = () => {
     amount > 0 ? setAmount((prev) => prev - 1) : setAmount(0);
   };
   const amoutBtnAddHandler = () => {
-    setAmount((prev) => prev + 1);
+    amount < productDetails.stock
+      ? setAmount((prev) => prev + 1)
+      : alert("Max Stock: " + productDetails.stock);
   };
 
-  useEffect(() => {
-    console.log(amount);
-  }, [amount]);
   return (
     <>
       <Section>
@@ -113,24 +115,81 @@ const page = () => {
                   <AmountBtn
                     children="-"
                     onClick={amountBtnSubstracterHandler}
+                    disabled={amount <= 0 ? true : false}
                   />
-                  <p>{amount}</p>
-                  <AmountBtn children="+" onClick={amoutBtnAddHandler} />
+                  <p className="w-48px flex items-center justify-center">
+                    {amount}{" "}
+                  </p>
+                  <AmountBtn
+                    children="+"
+                    onClick={amoutBtnAddHandler}
+                    disabled={amount >= productDetails.stock ? true : false}
+                    className=""
+                  />
                 </div>
                 <Button variant="call" text="Add to cart" href="/" />
               </div>
+              <p>
+                <small className="text-dark-100/50">
+                  Stock:{amount} /{productDetails.stock}
+                </small>
+              </p>
             </div>
           </div>
           <div className="product-features-container mt-[88px]">
             <div className="product-features__features">
-              <h2 className="heading__4 mb-[24px]">Features</h2>
+              <h2 className="heading__4 mb-[24px] uppercase">Features</h2>
               <div
-                className="__features__text paragraph text-dark-100 opacity-50"
                 dangerouslySetInnerHTML={{
                   __html: sanitizeHtml(productDetails.description),
                 }}
+                className="__features__text paragraph text-dark-100 opacity-50"
               />
             </div>
+            {productDetails.inBox && (
+              <div className="product-features__inBox">
+                <h2 className="heading__4 mb-[24px] uppercase">In the box</h2>
+                <ul className="__inBox__list">
+                  {productDetails.inBox?.includes.map(
+                    (
+                      { item, quantity }: { item: string; quantity: number },
+                      index: number
+                    ) => (
+                      <li key={index}>
+                        <span className="text-prime-100 mr-[24px] font-bold text-[15px] leading-[25px]">
+                          {quantity}X
+                        </span>
+                        <span className="text-dark-100/50">{item}</span>
+                      </li>
+                    )
+                  )}
+                </ul>
+              </div>
+            )}
+          </div>
+          <div className="product-images-container mt-[88px]">
+            {productDetails.imgs &&
+              productDetails.imgs.map(
+                ({
+                  id,
+                  url,
+                  height,
+                  width,
+                }: {
+                  id: string;
+                  url: string;
+                  height: number;
+                  width: number;
+                }) => (
+                  <Image
+                    src={url}
+                    alt={productDetails.name}
+                    key={id}
+                    width={width}
+                    height={height}
+                  />
+                )
+              )}
           </div>
         </Container>
       </Section>

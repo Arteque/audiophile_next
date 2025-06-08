@@ -13,17 +13,7 @@ export default async function handler(
   }
 
   try {
-    const data = await shopwareFetch(`product/${productId}`, "POST", {
-      body: JSON.stringify({
-        filter: [
-          {
-            type: "equals",
-            field: "product.id",
-            value: productId,
-          },
-        ],
-      }),
-    });
+    const data = await shopwareFetch(`product/${productId}`, "POST");
 
     if (!data) {
       return res

@@ -3,11 +3,15 @@ import { ReactNode } from "react";
 
 type ParagraphProps = {
   children: ReactNode;
-  txtColor ?: string;
-  className?:string;
+  txtColor?: string;
+  className?: string;
 };
-const Paragraph = ({ children, txtColor, className, ...props }: ParagraphProps) => {
-
+const Paragraph = ({
+  children,
+  txtColor,
+  className,
+  ...props
+}: ParagraphProps) => {
   const textStyling = () => {
     switch (txtColor) {
       case "light":
@@ -21,7 +25,7 @@ const Paragraph = ({ children, txtColor, className, ...props }: ParagraphProps) 
 
   return (
     <p
-      className={`${textStyling()} text-[15px] leading-[25px] mb-[28px] ${className}`}
+      className={`paragraph ${textStyling()} ${className}`}
       area-label="paragraph"
       {...props}
     >
