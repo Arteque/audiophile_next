@@ -6,15 +6,11 @@ import Image from "next/image";
 const Hero = () => {
   return (
     <section
-      className="heroSection relative py-[10svh] bg-[#191919] "
+      className="heroSection bg-[#191919]  overflow-hidden"
       id="heroSection"
     >
-      <Container className="relative lg:flex lg:justify-between">
-        <div
-          className="relative z-10 mx-auto text-center lg:text-left max-w-[379px] lg:max-w-[398px] lg:mx-[unset]
-         
-        "
-        >
+      <Container className="relative flex items-center max-h-[768px] py-[15svh_20svh]">
+        <div className="z-10 mx-auto text-center lg:text-left max-w-[379px] lg:max-w-[398px] lg:mx-[unset]">
           <h1 className="mb-[28px]">
             <Subhead className="text-light-100/40 mb-[24px]">
               New Product
@@ -29,19 +25,29 @@ const Hero = () => {
           </Paragraph>
           <Button
             variant="call"
-            href="/products/headphones/xx99-mark-ii"
+            href={`/singleproduct/${encodeURI(
+              "xx99 mark ii headphones"
+            )}?id=019722b863f377a49c3b0532375b6e0c`}
             text="See Product"
             className="block w-fit mx-auto lg:mx-[unset]"
           />
         </div>
-        <div className="absolute top-[50%] translate-y-[-50%] lg:right-0">
-          <Image
-            src="/home/desktop/image-hero.jpg"
-            alt="xx99 mark ii headphones"
-            width={1000}
-            height={1000}
-            className="w-full h-auto block"
-          />
+        <div className="absolute inset-0 flex items-center justify-center ">
+          <picture>
+            <source
+              media="(min-width:1025px)"
+              srcSet="/home/tablet/image-hero.jpg"
+            />
+            <source
+              media="(min-width:768px)"
+              srcSet="/home/tablet/image-hero.jpg"
+            />
+            <img
+              src="/home/mobile/image-hero.jpg"
+              alt="XX99 Mark II Headphones"
+              className="lg:w-[70%] lg:ml-auto lg:translate-x-[130px] lg:translate-y-[-60px]"
+            />
+          </picture>
         </div>
       </Container>
     </section>
