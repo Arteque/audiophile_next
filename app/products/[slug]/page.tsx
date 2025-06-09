@@ -29,6 +29,7 @@ const ProductPage = () => {
       try {
         const response = await fetch(`/api/productlisting?id=${id}`);
         const data: ProductApiResponse = await response.json();
+        console.log(data);
         setProducts(
           (data.elements || []).sort((a, b) =>
             (b.name || "").localeCompare(a.name || "")
