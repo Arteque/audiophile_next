@@ -16,7 +16,7 @@
 
 body::after {
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 95;
   background: var(--color-dark-100);
@@ -24,7 +24,8 @@ body::after {
   pointer-events: none;
   transition: all 0.3s;
 }
-body[data-menu="open"]::after {
+body[data-menu="open"]::after,
+body[data-cart="open"]::after {
   opacity: 0.8;
   backdrop-filter: grayscale(1);
   -webkit-backdrop-filter: grayscale(1);

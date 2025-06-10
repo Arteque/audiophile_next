@@ -8,8 +8,8 @@ import sanitizeHtml from "sanitize-html";
 import Image from "next/image";
 import Subhead from "@/_components/Assets/Subhead";
 import Currency from "@/Tools/Currency";
-import AmountBtn from "@/_components/Assets/Cart/AmountBtn";
 import Paragraph from "@/_components/Assets/Paragraph";
+import AddAndDelItemBtns from "@/_components/Assets/Cart/AddAndDelItemBtns";
 
 type ProductApiResponse = {
   product: any; //
@@ -57,18 +57,6 @@ const page = () => {
     history.go(-1);
   };
 
-  //Amount
-  const [amount, setAmount] = useState<number>(1);
-
-  const amountBtnSubstracterHandler = () => {
-    amount > 0 ? setAmount((prev) => prev - 1) : setAmount(0);
-  };
-  const amoutBtnAddHandler = () => {
-    amount < productDetails.stock
-      ? setAmount((prev) => prev + 1)
-      : alert("Max Stock: " + productDetails.stock);
-  };
-
   return (
     <>
       <Section>
@@ -108,43 +96,13 @@ const page = () => {
                 {productDetails.teaser}
               </Paragraph>
               <p className="mb-[31px] font-bold text-[18px] tracking-[1.29px]">
-                {Currency(
-                  amount > 0
-                    ? productDetails.price * amount
-                    : productDetails.price,
-                  "USD"
-                )}
+                {Currency(productDetails.price, "USD")}
               </p>
               <div className="buy-container flex gap-[1rem]">
-                <div className="flex flex-row flex-nowrap gap-1 items-center bg-dark-100/10 w-fit">
-                  <AmountBtn
-                    children="-"
-                    onClick={amountBtnSubstracterHandler}
-                    disabled={amount <= 0 ? true : false}
-                  />
-                  <p
-                    className={`w-[48px] text-[13px] font-bold tracking-[1px] flex items-center justify-center ${
-                      amount >= productDetails.stock || amount <= 0
-                        ? "text-red-600"
-                        : "text-dark-100/50"
-                    }`}
-                  >
-                    {amount}{" "}
-                  </p>
-                  <AmountBtn
-                    children="+"
-                    onClick={amoutBtnAddHandler}
-                    disabled={amount >= productDetails.stock ? true : false}
-                    className=""
-                  />
-                </div>
+                <AddAndDelItemBtns stock={productDetails.stock} />
+
                 <Button variant="call" text="Add to cart" href="/" />
               </div>
-              <p>
-                <small className="text-dark-100/50">
-                  Stock:{amount} /{productDetails.stock}
-                </small>
-              </p>
             </div>
           </div>
           <div className="product-features-container mt-[88px]">
