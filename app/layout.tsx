@@ -3,7 +3,6 @@ import { Manrope } from "next/font/google";
 import "../styles/globals.css";
 import Header from "@/_components/shared/Header";
 import Footer from "@/_components/shared/Footer";
-import Cart from "@/_components/shared/Cart";
 
 export const metadata: Metadata = {
   title: "Audiophile Online Shope",
@@ -25,7 +24,6 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
-        <Cart />
       </body>
     </html>
   );

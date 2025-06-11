@@ -1,6 +1,6 @@
 import Nav from "../Assets/Nav";
 import Burger from "../Assets/Burger";
-import Cart from "../Assets/Cart";
+import Cart from "../Assets/Cart/Cart";
 import Logo from "../Assets/Logo";
 import Container from "../Assets/Container";
 const Header = () => {

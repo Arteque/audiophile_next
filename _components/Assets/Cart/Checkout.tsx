@@ -4,12 +4,18 @@ import Currency from "@/Tools/Currency";
 import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import Loading from "@/Tools/Loading";
-import AddAndDelItemBtns from "../Assets/Cart/AddAndDelItemBtns";
+import AddAndDelItemBtns from "./AddAndDelItemBtns";
+import Button from "../Button";
 
-const Cart = () => {
+const Checkout = ({ cartState = false }: { cartState: boolean }) => {
   const i = 0.1;
   const [itemsInCart, setItemsInCart] = useState<number>(1);
-  const [cartState, setCartState] = useState<boolean>(true);
+  const [cartTotal, setCartTotal] = useState<number>(0);
+
+  const checkoutHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+  };
+
   useEffect(() => {
     const requestCart = async () => {
       try {
@@ -30,6 +36,10 @@ const Cart = () => {
       : "overflow-y:auto";
   }, [cartState]);
 
+  useEffect(() => {
+    console.log(cartTotal);
+  }, [cartTotal]);
+
   return (
     <motion.div
       initial={{
@@ -40,11 +50,13 @@ const Cart = () => {
         opacity: 1,
         translateY: 0,
       }}
-      className="rounded-[8px] overflow-hidden bg-light-200 py-[32px] px-[28px]
-    fixed top-[114px] inset-x-[24px] z-[888] md:right-[8svw] md:max-w-[500px] md:inset-x-[unset]"
+      className={`rounded-[8px] overflow-hidden bg-light-200 py-[32px] px-[28px]
+    fixed top-[114px] inset-x-[24px] z-[888] md:right-[8svw] md:max-w-[500px] md:inset-x-[unset] ${
+      cartState ? "visible pointer-event-none:" : "hidden pointer-events-auto"
+    }`}
     >
-      <div className="card_header">
-        <div className="flex flex-row justify-between">
+      <div className="card_container">
+        <div className="card_header flex flex-row justify-between">
           <h2 className={`${itemsInCart <= 0 ? "text-dark-100/50" : ""}`}>
             Cart {itemsInCart > 0 && `(${itemsInCart})`}
           </h2>
@@ -183,9 +195,24 @@ const Cart = () => {
             </p>
           )}
         </div>
+        <div className="card_footer">
+          <div className="_footer_total flex justify-between items-center mb-[24px]">
+            <p className="text-dark-100/50 uppercase">Total</p>
+            <p>
+              <strong>{Currency(cartTotal, "USD")}</strong>
+            </p>
+          </div>
+          <Button
+            href="/"
+            variant="call"
+            text="Checkout"
+            onClick={checkoutHandler}
+            className="block text-center"
+          />
+        </div>
       </div>
     </motion.div>
   );
 };
 
-export default Cart;
+export default Checkout;
