@@ -10,6 +10,7 @@ import Subhead from "@/_components/Assets/Subhead";
 import Currency from "@/Tools/Currency";
 import Paragraph from "@/_components/Assets/Paragraph";
 import AddAndDelItemBtns from "@/_components/Assets/Cart/AddAndDelItemBtns";
+import Loading from "@/app/loading";
 
 type ProductApiResponse = {
   product: any; //
@@ -21,6 +22,7 @@ const page = () => {
   const searchParams = useSearchParams();
   const id = searchParams?.get("id");
   const [productDetails, setProductDetails] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!slug) return;
@@ -56,6 +58,8 @@ const page = () => {
     e.preventDefault();
     history.go(-1);
   };
+
+  isLoading && <Loading />;
 
   return (
     <>

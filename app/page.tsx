@@ -4,7 +4,11 @@ import Showcase from "@/_components/Pages/Start/Showcase";
 import Showcase_2 from "@/_components/Pages/Start/Showcase_2";
 import Showcase_3 from "@/_components/Pages/Start/Showcase_3";
 
-const page = () => {
+// Add async to make this a server component that can show loading
+const page = async () => {
+  // Simulate loading delay to demonstrate the loading page
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
   return (
     <>
       <Hero />

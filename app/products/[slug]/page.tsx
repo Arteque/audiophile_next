@@ -21,12 +21,17 @@ const ProductPage = () => {
   const id = searchParams?.get("id");
   const productName = useParams();
   const [products, setProducts] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!id) return;
 
     const fetchProducts = async () => {
       try {
+        setIsLoading(true);
+        // Add artificial delay to see loading animation
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+
         const response = await fetch(`/api/productlisting?id=${id}`);
         const data: ProductApiResponse = await response.json();
         console.log(data);
@@ -37,27 +42,38 @@ const ProductPage = () => {
         );
       } catch (err) {
         console.error("Failed to fetch products:", err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchProducts();
   }, [id]);
 
+  // Show loading page while fetching data
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <PageHero pageTitle={String(productName?.slug)} />
       <Section>
         <Container className="mt-[64px] md:mt-[120px]">
-          {products.map((product) => (
+          {products.map((product, index) => (
             <Suspense key={product.id} fallback={<Loading />}>
-              <div className="product mb-[120px]">
+              <div
+                className={`product mb-[120px] lg:flex lg:gap-[125px] ${
+                  index % 2 && "flex-row-reverse"
+                }`}
+              >
                 <div className="media">
                   <Image
                     src={product.cover?.media?.url}
                     alt={product.name}
                     width={800}
                     height={800}
-                    className="w-full"
+                    className="w-full lg:w-[540px] aspect-auto"
                     priority
                   />
                 </div>
@@ -66,7 +82,7 @@ const ProductPage = () => {
                    md:mt-[52] md:max-w-[572px] 
                 "
                 >
-                  <h2 className="max-w-[300px]">
+                  <h2 className="max-w-[300px] self-start text-left">
                     {product.isNew && (
                       <Subhead className="text-prime-100">new product</Subhead>
                     )}
@@ -74,8 +90,11 @@ const ProductPage = () => {
                       {product.name || product.translated.name}
                     </span>
                   </h2>
-                  <Paragraph>{product.customFields?.custom_text_}</Paragraph>
+                  <Paragraph className="lg:text-left mb-[0_!important]">
+                    {product.customFields?.custom_text_}
+                  </Paragraph>
                   <Button
+                    className="lg:self-start"
                     variant="call"
                     text="See product"
                     href={`${
