@@ -89,7 +89,7 @@ const AboutSection = ({
         </div>
         <div
           className={`content ${
-            singleView ? "text-left" : "text-center"
+            singleView ? "text-left" : "text-center lg:text-left"
           } lg:w-[50%] `}
         >
           <h2 className="heading__3 my-[40px_32px]">

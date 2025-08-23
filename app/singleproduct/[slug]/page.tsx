@@ -91,6 +91,10 @@ const SingleProductPage = () => {
     fetchProdutDetais();
   }, [id, slug]);
 
+  useEffect(() => {
+    console.log(productDetails)
+  },[]) 
+
   // Go Back
   const goBackBtnHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -165,19 +169,7 @@ const SingleProductPage = () => {
               <div className="product-features__inBox">
                 <h2 className="heading__4 mb-[24px] uppercase">In the box</h2>
                 <ul className="__inBox__list">
-                  {productDetails.inBox.map(
-                    (
-                      item: { item: string; quantity: number },
-                      index: number
-                    ) => (
-                      <li key={index}>
-                        <span className="text-prime-100 mr-[24px] font-bold text-[15px] leading-[25px]">
-                          {item.quantity}X
-                        </span>
-                        <span className="text-dark-100/50">{item.item}</span>
-                      </li>
-                    )
-                  )}
+                 
                 </ul>
               </div>
             )}

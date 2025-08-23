@@ -1,6 +1,6 @@
 const Loading = () => {
   return (
-    <div className="absolute inset-0 z-[9999999999] flex items-center justify-center bg-light-200">
+    <div className="absolute inset-0 z-[999999] flex items-center justify-center bg-light-200">
       <p className="text-center text-red-800 flex gap-5 w-fit mx-auto items-center justify-center">
         <span className="icon animate-spin w-[20px] block">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

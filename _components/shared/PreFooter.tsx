@@ -8,7 +8,7 @@ type PreFooterProps = {
 const PreFooter = ({ className }: PreFooterProps) => {
   return (
     <AboutSection
-      className={className}
+      className={`lg:text-left ${className}`}
       reverse
       img={{
         desktop: "/shared/desktop/image-best-gear.jpg",
