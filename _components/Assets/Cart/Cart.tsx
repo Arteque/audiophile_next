@@ -32,6 +32,19 @@ const Cart: FC<CartProps> = ({ itemsCount = 0 }) => {
     }
   }, [itemsCount]);
 
+  useEffect(() => {
+    try {
+      const fetchCartItems = async () => {
+        const response = await fetch("/api/GetCardItems");
+        const data = await response.json();
+        console.log(data);
+      };
+      fetchCartItems();
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+    }
+  }, []);
+
   return (
     <>
       <button
