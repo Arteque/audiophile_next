@@ -247,14 +247,6 @@ This project is part of a Frontend Mentor challenge. Please refer to their terms
 
 ## 👨‍💻 Developer
 
-**Ahmed Lemssiah** - _Full Stack Developer_
+**Ahmed Lemssiah** - _Web Developer_
 
 ---
-
-Built with ❤️ using Next.js and modern web technologies.
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
