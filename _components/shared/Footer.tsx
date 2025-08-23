@@ -51,7 +51,9 @@ const Footer = () => {
             className="my-[52px_48px] md:my-[0] text-light-100/50
           lg:row-start-3"
           >
-            <strong>Copyright 2021. All Rights Reserved</strong>
+            <strong>
+              Copyright {new Date().getFullYear()}. All Rights Reserved
+            </strong>
           </Paragraph>
           <ul
             className="social flex gap-5 justify-center items-center
