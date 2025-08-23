@@ -12,20 +12,56 @@ import Paragraph from "@/_components/Assets/Paragraph";
 import AddAndDelItemBtns from "@/_components/Assets/Cart/AddAndDelItemBtns";
 import Loading from "@/app/loading";
 
+interface ProductDetails {
+  name: string;
+  cover: string;
+  coverName: string;
+  media: unknown[];
+  stock: number;
+  teaser: string;
+  description: string;
+  productNumber: string;
+  isNew: boolean;
+  price: number;
+  inBox: Array<{ item: string; quantity: number }>;
+}
+
+interface Product {
+  name: string;
+  cover: {
+    media: {
+      url: string;
+      fileName: string;
+    };
+  };
+  media: unknown[];
+  availableStock: number;
+  customFields: {
+    custom_text_: string;
+    custom_item: string;
+  };
+  description: string;
+  productNumber: string;
+  isNew: boolean;
+  calculatedPrice: {
+    unitPrice: number;
+  };
+}
+
 type ProductApiResponse = {
-  product: any; //
+  product: Product;
 };
 
-const page = () => {
+const SingleProductPage = () => {
   const params = useParams();
   const slug = params?.slug;
   const searchParams = useSearchParams();
   const id = searchParams?.get("id");
-  const [productDetails, setProductDetails] = useState<any>([]);
+  const [productDetails, setProductDetails] = useState<ProductDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!slug) return;
+    if (!slug || !id) return;
 
     const fetchProdutDetais = async () => {
       try {
@@ -48,10 +84,12 @@ const page = () => {
         });
       } catch (err) {
         console.log("Error :", err);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchProdutDetais();
-  }, []);
+  }, [id, slug]);
 
   // Go Back
   const goBackBtnHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -59,7 +97,11 @@ const page = () => {
     history.go(-1);
   };
 
-  isLoading && <Loading />;
+  if (isLoading) return <Loading />;
+  
+  if (!productDetails) {
+    return <div>Product not found</div>;
+  }
 
   return (
     <>
@@ -123,16 +165,16 @@ const page = () => {
               <div className="product-features__inBox">
                 <h2 className="heading__4 mb-[24px] uppercase">In the box</h2>
                 <ul className="__inBox__list">
-                  {productDetails.inBox?.includes.map(
+                  {productDetails.inBox.map(
                     (
-                      { item, quantity }: { item: string; quantity: number },
+                      item: { item: string; quantity: number },
                       index: number
                     ) => (
                       <li key={index}>
                         <span className="text-prime-100 mr-[24px] font-bold text-[15px] leading-[25px]">
-                          {quantity}X
+                          {item.quantity}X
                         </span>
-                        <span className="text-dark-100/50">{item}</span>
+                        <span className="text-dark-100/50">{item.item}</span>
                       </li>
                     )
                   )}
@@ -140,11 +182,11 @@ const page = () => {
               </div>
             )}
           </div>
-          {productDetails.media && (
+          {productDetails.media && Array.isArray(productDetails.media) && (
             <div className="product-images-container mt-[88px] flex flex-col  gap-[1rem]">
               {productDetails.media.map(
-                (item: any) =>
-                  item.media.fileName !== productDetails.coverName && (
+                (item: any, index: number) =>
+                  item.media && item.media.fileName !== productDetails.coverName && (
                     <Image
                       src={item.media.url}
                       alt={
@@ -152,9 +194,9 @@ const page = () => {
                         item.media.title ||
                         productDetails.name + " " + item.media.fileName
                       }
-                      key={item.id}
-                      width={item.media.metaData.width}
-                      height={item.media.metaData.height}
+                      key={item.id || index}
+                      width={item.media.metaData?.width || 800}
+                      height={item.media.metaData?.height || 600}
                     />
                   )
               )}
@@ -166,4 +208,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SingleProductPage;

@@ -13,14 +13,31 @@ import Loading from "@/Tools/Loading";
 
 // Define the expected API response type
 interface ProductApiResponse {
-  elements: any[];
+  elements: Product[];
+}
+
+interface Product {
+  id: string;
+  name: string;
+  isNew?: boolean;
+  cover?: {
+    media?: {
+      url: string;
+    };
+  };
+  translated?: {
+    name: string;
+  };
+  customFields?: {
+    custom_text_?: string;
+  };
 }
 
 const ProductPage = () => {
   const searchParams = useSearchParams();
   const id = searchParams?.get("id");
   const productName = useParams();
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -69,8 +86,8 @@ const ProductPage = () => {
               >
                 <div className="media">
                   <Image
-                    src={product.cover?.media?.url}
-                    alt={product.name}
+                    src={product.cover?.media?.url || "/placeholder-image.jpg"}
+                    alt={product.name || "Product image"}
                     width={800}
                     height={800}
                     className="w-full lg:w-[540px] aspect-auto"
@@ -87,7 +104,9 @@ const ProductPage = () => {
                       <Subhead className="text-prime-100">new product</Subhead>
                     )}
                     <span className="heading__3 block mt-[24px]">
-                      {product.name || product.translated.name}
+                      {product.name ||
+                        product.translated?.name ||
+                        "Product Name"}
                     </span>
                   </h2>
                   <Paragraph className="lg:text-left mb-[0_!important]">
@@ -100,7 +119,7 @@ const ProductPage = () => {
                     href={`${
                       process.env.NEXT_PUBLIC_SITE_URL
                     }/singleproduct/${encodeURI(
-                      product.name || product.translated.name
+                      product.name || product.translated?.name || "product"
                     )}/?id=${product.id}`}
                   />
                 </div>

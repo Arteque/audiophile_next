@@ -1,8 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { shopwareFetch } from "@/Tools/shop";
 
+interface Product {
+  customFields?: {
+    custom_images_?: string;
+    custom_images_tablet?: string;
+    custom_images_desktop?: string;
+  };
+  customImageData?: {
+    mobile: unknown;
+    tablet: unknown;
+    desktop: unknown;
+  };
+}
+
+interface MediaResponse {
+  data?: Array<{ id: string; [key: string]: unknown }>;
+}
+
 // Helper to extract custom field media IDs from products
-async function extractCustomMediaIds(products: any[]) {
+async function extractCustomMediaIds(products: Product[]) {
   const ids = new Set<string>();
   for (const product of products) {
     console.log("Product customFields:", product.customFields);
@@ -18,7 +35,7 @@ async function extractCustomMediaIds(products: any[]) {
 async function fetchMediaByIds(ids: string[]) {
   if (!ids.length) return {};
 
-  const mediaResponse = await shopwareFetch("media", "POST", {
+  const mediaResponse: MediaResponse = await shopwareFetch("media", "POST", {
     body: JSON.stringify({
       filter: [
         {
@@ -37,7 +54,7 @@ async function fetchMediaByIds(ids: string[]) {
     }),
   });
 
-  const mediaMap: Record<string, any> = {};
+  const mediaMap: Record<string, unknown> = {};
   for (const media of mediaResponse?.data || []) {
     mediaMap[media.id] = media;
   }
@@ -100,9 +117,11 @@ export default async function handler(
 
     // Final response
     res.status(200).json({ ...data, elements: products });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     res
       .status(500)
-      .json({ message: "Internal Server Error", error: error.message });
+      .json({ message: "Internal Server Error", error: errorMessage });
   }
 }
