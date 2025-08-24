@@ -1,6 +1,6 @@
 "use client";
 import AmountBtn from "./AmountBtn";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 const AddAndDelItemBtns = ({
   stock,
   className,

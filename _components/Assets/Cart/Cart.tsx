@@ -3,8 +3,6 @@
 import { useEffect, useState, FC, MouseEvent } from "react";
 import Image from "next/image";
 import Checkout from "./Checkout";
-import { AnimatePresence, motion } from "framer-motion";
-import { filter } from "motion/react-client";
 
 interface CartProps {
   itemsCount?: number;
