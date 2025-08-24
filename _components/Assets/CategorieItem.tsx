@@ -24,7 +24,7 @@ const CategorieItem = ({ cat }: { cat: any }) => {
         </h3>
         <Button
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/products/${
-            cat.name || cat.translated.name
+            cat.name.toLowerCase() || cat.translated.name.toLowerCase()
           }?id=${cat.id}`}
           variant="inline"
           text="Shop"
@@ -32,7 +32,7 @@ const CategorieItem = ({ cat }: { cat: any }) => {
         />
         <Link
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/products/${
-            cat.name || cat.translated.name
+            cat.name.toLowerCase() || cat.translated.name.toLowerCase()
           }?id=${cat.id}`}
           className="absolute inset-0 z-10"
         ></Link>

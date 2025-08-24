@@ -31,7 +31,7 @@ const AddAndDelItemBtns = ({
             className={`${className}`}
           />
           <p
-            className={`max-w-[48px] text-[13px] font-bold tracking-[1px] flex items-center justify-center ${
+            className={`w-[30px] text-[13px] font-bold tracking-[1px] flex items-center justify-center ${
               amount >= stock || amount <= 0
                 ? "text-red-600"
                 : "text-dark-100/50"

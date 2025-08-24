@@ -1,109 +1,52 @@
-"use client";
+import { Metadata } from "next";
 import Button from "@/_components/Assets/Button";
 import Container from "@/_components/Assets/Container";
 import Section from "@/_components/Assets/Section";
-import { useSearchParams, useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import sanitizeHtml from "sanitize-html";
 import Image from "next/image";
 import Subhead from "@/_components/Assets/Subhead";
 import Currency from "@/Tools/Currency";
 import Paragraph from "@/_components/Assets/Paragraph";
 import AddAndDelItemBtns from "@/_components/Assets/Cart/AddAndDelItemBtns";
-import Loading from "@/app/loading";
+import { getProductBySlug, getAllProducts, Product } from "@/lib/data";
 
-interface ProductDetails {
-  name: string;
-  cover: string;
-  coverName: string;
-  media: unknown[];
-  stock: number;
-  teaser: string;
-  description: string;
-  productNumber: string;
-  isNew: boolean;
-  price: number;
-  inBox: Array<{ item: string; quantity: number }>;
+export async function generateStaticParams() {
+  const products = await getAllProducts();
+  return products.map((product) => ({
+    slug: product.slug,
+  }));
 }
 
-interface Product {
-  name: string;
-  cover: {
-    media: {
-      url: string;
-      fileName: string;
-    };
-  };
-  media: unknown[];
-  availableStock: number;
-  customFields: {
-    custom_text_: string;
-    custom_item: string;
-  };
-  description: string;
-  productNumber: string;
-  isNew: boolean;
-  calculatedPrice: {
-    unitPrice: number;
-  };
-}
-
-type ProductApiResponse = {
-  product: Product;
-};
-
-const SingleProductPage = () => {
-  const params = useParams();
-  const slug = params?.slug;
-  const searchParams = useSearchParams();
-  const id = searchParams?.get("id");
-  const [productDetails, setProductDetails] = useState<ProductDetails | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (!slug || !id) return;
-
-    const fetchProdutDetais = async () => {
-      try {
-        const resp = await fetch(`/api/single?id=${id}`);
-        const data: ProductApiResponse = await resp.json();
-        console.log(data);
-
-        setProductDetails({
-          name: data.product.name,
-          cover: data.product.cover.media.url,
-          coverName: data.product.cover.media.fileName,
-          media: data.product.media,
-          stock: data.product.availableStock,
-          teaser: data.product.customFields.custom_text_,
-          description: sanitizeHtml(data.product.description),
-          productNumber: data.product.productNumber,
-          isNew: data.product.isNew,
-          price: data.product.calculatedPrice.unitPrice,
-          inBox: JSON.parse(data.product.customFields.custom_item),
-        });
-      } catch (err) {
-        console.log("Error :", err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchProdutDetais();
-  }, [id, slug]);
-
-  useEffect(() => {
-    console.log(productDetails)
-  },[]) 
-
-  // Go Back
-  const goBackBtnHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    history.go(-1);
-  };
-
-  if (isLoading) return <Loading />;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
   
-  if (!productDetails) {
+  if (!product) {
+    return {
+      title: "Product Not Found",
+      description: "The requested product could not be found.",
+    };
+  }
+
+  return {
+    title: product.name,
+    description: product.description,
+    openGraph: {
+      title: product.name,
+      description: product.description,
+      images: [product.image.desktop],
+    },
+  };
+}
+
+const SingleProductPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
+
+  if (!product) {
     return <div>Product not found</div>;
   }
 
@@ -112,88 +55,120 @@ const SingleProductPage = () => {
       <Section>
         <Container>
           <Button
-            href="/"
+            href={`/products/${product.category}`}
             variant="default"
             text="Go Back"
-            onClick={goBackBtnHandler}
             className="block my-[1rem_24px]"
           />
 
-          <div className="product-view-container">
-            <div className="product-view__media">
+          <div className="product-view-container lg:flex lg:gap-[125px] lg:items-center">
+            <div className="product-view__media lg:flex-1">
               <Image
-                src={
-                  productDetails.cover || "/shared/desktop/image-best-gear.jpg"
-                }
-                alt={productDetails.name || "Default Text"}
-                width={800}
-                height={800}
-                className="w-full"
+                src={product.image.desktop}
+                alt={product.name}
+                width={540}
+                height={560}
+                className="w-full rounded-lg"
+                priority
               />
             </div>
-            <div className="product-view__text">
+            <div className="product-view__text lg:flex-1 lg:pl-[32px]">
               <h2>
-                {productDetails.isNew && (
+                {product.new && (
                   <Subhead className="text-prime-100 mt-[32px] block">
                     New Product
                   </Subhead>
                 )}
                 <span className="heading__3 my-[24px] block">
-                  {productDetails.name}
+                  {product.name}
                 </span>
               </h2>
               <Paragraph className="font-medium opacity-50">
-                {productDetails.teaser}
+                {product.description}
               </Paragraph>
               <p className="mb-[31px] font-bold text-[18px] tracking-[1.29px]">
-                {Currency(productDetails.price, "USD")}
+                {Currency(product.price, "USD")}
               </p>
-              <div className="buy-container flex gap-[1rem]">
-                <AddAndDelItemBtns stock={productDetails.stock} />
-
+              <div className="buy-container flex items-start gap-[1rem]">
+                <AddAndDelItemBtns stock={product.stock} />
                 <Button variant="call" text="Add to cart" href="/" />
               </div>
             </div>
           </div>
-          <div className="product-features-container mt-[88px]">
-            <div className="product-features__features">
+          
+          <div className="product-features-container mt-[88px] lg:flex lg:gap-[125px]">
+            <div className="product-features__features lg:flex-[2]">
               <h2 className="heading__4 mb-[24px] uppercase">Features</h2>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: sanitizeHtml(productDetails.description),
-                }}
-                className="__features__text paragraph text-dark-100 opacity-50"
+              <div className="__features__text paragraph text-dark-100 opacity-50 whitespace-pre-line">
+                {product.features}
+              </div>
+            </div>
+            
+            <div className="product-features__inBox lg:flex-1 mt-[88px] lg:mt-0">
+              <h2 className="heading__4 mb-[24px] uppercase">In the box</h2>
+              <ul className="__inBox__list">
+                {product.includes.map((item, index) => (
+                  <li key={index} className="flex gap-[24px] mb-[8px]">
+                    <span className="font-bold text-prime-100 min-w-[12px]">
+                      {item.quantity}x
+                    </span>
+                    <span className="opacity-50">{item.item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="product-images-container mt-[88px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px] mb-[20px]">
+              <Image
+                src={product.gallery.first.desktop}
+                alt={`${product.name} gallery image 1`}
+                width={445}
+                height={280}
+                className="w-full rounded-lg"
+              />
+              <Image
+                src={product.gallery.second.desktop}
+                alt={`${product.name} gallery image 2`}
+                width={445}
+                height={280}
+                className="w-full rounded-lg"
               />
             </div>
-            {productDetails.inBox && (
-              <div className="product-features__inBox">
-                <h2 className="heading__4 mb-[24px] uppercase">In the box</h2>
-                <ul className="__inBox__list">
-                 
-                </ul>
-              </div>
-            )}
+            <Image
+              src={product.gallery.third.desktop}
+              alt={`${product.name} gallery image 3`}
+              width={635}
+              height={592}
+              className="w-full rounded-lg"
+            />
           </div>
-          {productDetails.media && Array.isArray(productDetails.media) && (
-            <div className="product-images-container mt-[88px] flex flex-col  gap-[1rem]">
-              {productDetails.media.map(
-                (item: any, index: number) =>
-                  item.media && item.media.fileName !== productDetails.coverName && (
-                    <Image
-                      src={item.media.url}
-                      alt={
-                        item.media.alt ||
-                        item.media.title ||
-                        productDetails.name + " " + item.media.fileName
-                      }
-                      key={item.id || index}
-                      width={item.media.metaData?.width || 800}
-                      height={item.media.metaData?.height || 600}
-                    />
-                  )
-              )}
+
+          <div className="you-may-also-like mt-[120px]">
+            <h3 className="heading__4 text-center mb-[40px] uppercase">
+              You may also like
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-[56px]">
+              {product.others.map((otherProduct, index) => (
+                <div key={index} className="text-center">
+                  <Image
+                    src={otherProduct.image.desktop}
+                    alt={otherProduct.name}
+                    width={350}
+                    height={318}
+                    className="w-full rounded-lg mb-[32px]"
+                  />
+                  <h4 className="heading__5 mb-[32px]">{otherProduct.name}</h4>
+                  <Button
+                    variant="call"
+                    text="See Product"
+                    href={`/singleproduct/${otherProduct.slug}`}
+                  />
+                </div>
+              ))}
             </div>
-          )}
+          </div>
         </Container>
       </Section>
     </>

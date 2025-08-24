@@ -5,8 +5,11 @@ import Header from "@/_components/shared/Header";
 import Footer from "@/_components/shared/Footer";
 
 export const metadata: Metadata = {
-  title: "Audiophile Online Shope",
-  description: "Code By Ahmed Lemssiah",
+  title: {
+    template: '%s | Audiophile',
+    default: 'Audiophile - Premium Audio Equipment',
+  },
+  description: "Discover premium audio equipment including headphones, speakers, and earphones at Audiophile",
 };
 
 const manrope = Manrope({
