@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 
 type AmountBtnProps = {
-  children: "-" | "+";
+  children: "-" | "+" | React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
   className?: string;

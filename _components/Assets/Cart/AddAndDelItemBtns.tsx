@@ -1,11 +1,15 @@
 "use client";
+import { FaTrash } from "react-icons/fa";
+import Amount from "./Amount";
 import AmountBtn from "./AmountBtn";
 import { useState } from "react";
 const AddAndDelItemBtns = ({
   stock,
+  isInCart,
   className,
 }: {
   stock: number;
+  isInCart?: boolean;
   className?: string;
 }) => {
   //Amount
@@ -25,9 +29,15 @@ const AddAndDelItemBtns = ({
       <div className="items">
         <div className="flex flex-row flex-nowrap gap-1 items-center bg-dark-100/10 w-fit">
           <AmountBtn
-            children="-"
+            children={
+              isInCart && amount == 0 ? (
+                <FaTrash className="block w-3 h-3 fill-current" />
+              ) : (
+                "-"
+              )
+            }
             onClick={amountBtnDelHandler}
-            disabled={amount <= 0 ? true : false}
+            disabled={amount < 0 ? true : false}
             className={`${className}`}
           />
           <p
@@ -37,7 +47,7 @@ const AddAndDelItemBtns = ({
                 : "text-dark-100/50"
             } ${className}`}
           >
-            {amount}{" "}
+            {<Amount amount={amount} />}{" "}
           </p>
           <AmountBtn
             children="+"
