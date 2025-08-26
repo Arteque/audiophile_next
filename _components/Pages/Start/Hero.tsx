@@ -25,9 +25,7 @@ const Hero = () => {
           </Paragraph>
           <Button
             variant="call"
-            href={`/singleproduct/${encodeURI(
-              "xx99 mark ii headphones"
-            )}?id=019722b863f377a49c3b0532375b6e0c`}
+            href={`/singleproduct/xx99-mark-two-headphones`}
             text="See Product"
             className="block w-fit mx-auto lg:mx-[unset]"
           />

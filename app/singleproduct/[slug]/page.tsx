@@ -8,6 +8,7 @@ import Currency from "@/Tools/Currency";
 import Paragraph from "@/_components/Assets/Paragraph";
 import AddAndDelItemBtns from "@/_components/Assets/Cart/AddAndDelItemBtns";
 import { getProductBySlug, getAllProducts, Product } from "@/lib/data";
+import Features from "@/_components/shared/Product/Features";
 
 export async function generateStaticParams() {
   const products = await getAllProducts();
@@ -96,53 +97,33 @@ const SingleProductPage = async ({ params }: { params: Promise<{ slug: string }>
             </div>
           </div>
           
-          <div className="product-features-container mt-[88px] lg:flex lg:gap-[125px]">
-            <div className="product-features__features lg:flex-[2]">
-              <h2 className="heading__4 mb-[24px] uppercase">Features</h2>
-              <div className="__features__text paragraph text-dark-100 opacity-50 whitespace-pre-line">
-                {product.features}
-              </div>
-            </div>
-            
-            <div className="product-features__inBox lg:flex-1 mt-[88px] lg:mt-0">
-              <h2 className="heading__4 mb-[24px] uppercase">In the box</h2>
-              <ul className="__inBox__list">
-                {product.includes.map((item, index) => (
-                  <li key={index} className="flex gap-[24px] mb-[8px]">
-                    <span className="font-bold text-prime-100 min-w-[12px]">
-                      {item.quantity}x
-                    </span>
-                    <span className="opacity-50">{item.item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+           <Features product={product} />     
 
           <div className="product-images-container mt-[88px]">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px] mb-[20px]">
+            <div className="grid grid-cols-1 md:grid-cols-[0.4fr_0.6fr] gap-[20px] mb-[20px]">
               <Image
                 src={product.gallery.first.desktop}
                 alt={`${product.name} gallery image 1`}
                 width={445}
                 height={280}
-                className="w-full rounded-lg"
+                className="w-full h-full object-cover rounded-lg md:row-start-1 md:row-end-1 md:col-start-1 md:col-end-1"
               />
               <Image
                 src={product.gallery.second.desktop}
                 alt={`${product.name} gallery image 2`}
                 width={445}
                 height={280}
-                className="w-full rounded-lg"
+                className="w-full h-full object-cover rounded-lg md:row-start-2 md:row-end-2 md:col-start-1 md:col-end-1"
               />
-            </div>
-            <Image
+               <Image
               src={product.gallery.third.desktop}
               alt={`${product.name} gallery image 3`}
               width={635}
               height={592}
-              className="w-full rounded-lg"
+              className="w-full h-full object-cover rounded-lg md:row-start-1 md:row-end-3 md:col-start-2"
             />
+            </div>
+           
           </div>
 
           <div className="you-may-also-like mt-[120px]">
