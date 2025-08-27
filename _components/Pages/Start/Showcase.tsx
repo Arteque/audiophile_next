@@ -33,7 +33,7 @@ const Showcase = () => {
             truly remarkable sound.
           </Paragraph>
           <Button
-            href="/speakers/zx9"
+            href="/singleproduct/zx9-speaker"
             variant="dark"
             text="See Product"
             className="block w-fit mx-auto lg:mx-[unset]"
