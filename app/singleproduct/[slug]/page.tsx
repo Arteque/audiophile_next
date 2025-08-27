@@ -56,7 +56,7 @@ const SingleProductPage = async ({ params }: { params: Promise<{ slug: string }>
     <>
       <Section>
         <Container>
-          <GoBack  />
+          <GoBack />
 
           <div className="product-view-container lg:flex lg:gap-[125px] lg:items-center">
             <div className="product-view__media lg:flex-1">
