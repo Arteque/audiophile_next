@@ -36,7 +36,9 @@ Audiophile is a full-featured e-commerce platform specializing in high-end audio
 
 ### Additional Libraries
 
+- **State Management**: Zustand (5.0.8) - Lightweight state management for cart functionality
 - **Animation**: Motion (12.16.0)
+- **Notifications**: React-Toastify (11.0.5) - User feedback and cart notifications
 - **HTML Sanitization**: sanitize-html (2.17.0)
 - **Development**: ESLint, TypeScript
 
@@ -47,16 +49,23 @@ audiophile_next/
 ├── app/                          # Next.js App Router
 │   ├── layout.tsx               # Root layout with Header/Footer
 │   ├── page.tsx                 # Homepage
+│   ├── Checkout/                # Checkout page and components
 │   ├── products/[slug]/         # Product category pages
 │   └── singleproduct/[slug]/    # Individual product pages
 ├── _components/                  # Reusable UI components
 │   ├── Assets/                  # Basic UI elements
+│   │   └── Cart/               # Cart-related components
 │   ├── Pages/                   # Page-specific components
 │   └── shared/                  # Shared layout components
 ├── _data/                       # Static data and fallbacks
+├── lib/                         # Utility functions and configurations
+│   └── toast.ts                # Toast notification system
 ├── pages/api/                   # API routes for Shopware integration
 ├── public/                      # Static assets (images, icons)
-├── styles/                      # Global styles
+├── store/                       # Zustand state management
+│   └── CartStore.ts            # Shopping cart state management
+├── styles/                      # Global styles and component styling
+│   └── toast.css               # Toast notification styling
 ├── Tools/                       # Utility functions
 └── types/                       # TypeScript type definitions
 ```
@@ -72,9 +81,11 @@ audiophile_next/
 
 ### Data Management
 
+- **State Management**: Zustand for client-side cart state management
 - **Primary Source**: Shopware 6 API for live product data
 - **Fallback Data**: Local JSON files for development/offline usage
 - **Image Assets**: Organized by device breakpoints (mobile/tablet/desktop)
+- **Persistent Storage**: Cart state persisted across browser sessions
 
 ### Component Architecture
 
@@ -159,6 +170,92 @@ All images and layouts adapt seamlessly across devices.
 - `GET /api/navigation` - Navigation data
 - `GET /api/cart` - Cart operations
 
+## 🛒 Shopping Cart System (Zustand)
+
+### State Management Architecture
+
+The shopping cart is powered by **Zustand**, a lightweight state management solution that provides:
+
+- **Persistent Storage**: Cart state is automatically saved to localStorage
+- **Type Safety**: Full TypeScript support with comprehensive interfaces
+- **Performance**: Minimal re-renders with selective subscriptions
+- **Simplicity**: Clean, hook-based API without boilerplate
+
+### Cart Features
+
+#### Core Functionality
+
+- **Add Items**: `addItem(product)` - Add single items to cart
+- **Batch Add**: `addItemWithQuantity(product, quantity)` - Add multiple quantities at once
+- **Update Quantity**: `updateQuantity(id, quantity)` - Modify item quantities
+- **Remove Items**: `removeItem(id)` - Remove items from cart
+- **Clear Cart**: `clearCart()` - Empty entire cart
+
+#### Advanced Features
+
+- **Stock Management**: Real-time stock validation and limits
+- **Automatic Totals**: Dynamic calculation of total items and price
+- **Inventory Tracking**: Per-item stock monitoring
+- **Duplicate Handling**: Smart merging of identical products
+
+#### User Experience Enhancements
+
+- **Toast Notifications**: Real-time feedback for all cart actions
+  - Success notifications for items added
+  - Warning messages for stock limits
+  - Info alerts for quantity updates
+  - Error handling for out-of-stock items
+
+- **Visual Feedback**: 
+  - Animated cart icon with item count badge
+  - Smooth transitions for cart state changes
+  - Loading states during cart operations
+
+#### Cart Store Interface
+
+```typescript
+interface CartState {
+  items: CartStoreItem[]
+  totalItems: number
+  totalPrice: number
+  
+  // Core actions
+  addItem: (item: Omit<CartStoreItem, 'quantity'>) => void
+  addItemWithQuantity: (item: Omit<CartStoreItem, 'quantity'>, quantity: number) => void
+  removeItem: (id: string) => void
+  updateQuantity: (id: string, quantity: number) => void
+  clearCart: () => void
+  
+  // Utility functions
+  getItemById: (id: string) => CartStoreItem | undefined
+  isInCart: (id: string) => boolean
+  updateStock: (id: string, newStock: number) => void
+}
+```
+
+#### Usage Example
+
+```typescript
+import { useCartStore } from '@/store/CartStore'
+
+// In your component
+const Component = () => {
+  const addItem = useCartStore((state) => state.addItem)
+  const totalItems = useCartStore((state) => state.totalItems)
+  const items = useCartStore((state) => state.items)
+  
+  const handleAddToCart = () => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      stock: product.stock
+    })
+  }
+}
+```
+
 ## 🎨 UI/UX Features
 
 ### Design System
@@ -188,7 +285,12 @@ All images and layouts adapt seamlessly across devices.
 
 - **Product Discovery**: Category-based browsing
 - **Product Details**: Comprehensive product information
-- **Cart Functionality**: Add/remove items with quantity selection
+- **Advanced Cart**: Zustand-powered cart with persistent storage
+  - Real-time stock validation
+  - Batch quantity additions
+  - Toast notifications for user feedback
+  - Automatic total calculations
+- **Checkout Process**: Streamlined checkout with form validation
 - **Responsive Images**: Optimized for all screen sizes
 
 ## 🔧 Development
@@ -216,13 +318,19 @@ All images and layouts adapt seamlessly across devices.
 - Product detail pages
 - Responsive design implementation
 - Shopware 6 API integration
-- Basic cart functionality
+- **Advanced Shopping Cart System**:
+  - Zustand state management
+  - Persistent cart storage
+  - Real-time stock validation
+  - Toast notification system
+  - Batch quantity operations
+- Checkout page with form structure
 
 ### 🚧 In Development
 
-- Complete checkout process
-- User authentication
-- Order management
+- Complete checkout process with payment integration
+- User authentication and account management
+- Order management and history
 - Payment integration
 
 ### 📋 Planned Features
