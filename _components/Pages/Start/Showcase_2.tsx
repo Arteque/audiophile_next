@@ -10,7 +10,7 @@ const Showcase_2 = () => {
           <Button
             variant="border"
             text="See Product"
-            href="/speakers/zx7"
+            href="/singleproduct/zx7-speaker"
             className="block w-fit"
           />
         </div>

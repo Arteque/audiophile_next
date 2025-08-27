@@ -1,12 +1,12 @@
-import { motion } from "framer-motion"
-import Image from "next/image"
-import Loading from "@/Tools/Loading"
-import { Suspense } from "react"
-import Currency from "@/Tools/Currency"
-import AddAndDelItemBtns from "./AddAndDelItemBtns"
-import { useCartStore } from "@/store/CartStore"
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Loading from "@/Tools/Loading";
+import { Suspense } from "react";
+import Currency from "@/Tools/Currency";
+import AddAndDelItemBtns from "./AddAndDelItemBtns";
+import { useCartStore } from "@/store/CartStore";
 
-const ItemInTheCart = () => {
+const ItemInTheCart = ({ checkout }: { checkout?: boolean }) => {
   const items = useCartStore((state) => state.items);
 
   if (!items.length) {
@@ -29,23 +29,23 @@ const ItemInTheCart = () => {
           animate={{
             opacity: 1,
             y: 0,
-            transition: { 
+            transition: {
               delay: index * 0.05, // Reduced delay for snappier animation
               duration: 0.2,
-              ease: "easeOut"
+              ease: "easeOut",
             },
           }}
           exit={{
             y: -10,
             opacity: 0,
-            transition: { 
+            transition: {
               duration: 0.15,
-              ease: "easeIn"
-            }
+              ease: "easeIn",
+            },
           }}
           className="item flex items-center justify-between gap-5 mb-[24px]"
         >
-          <div className="flex flex-row gap-[1rem] items-center ">
+          <div className="flex flex-row gap-[1rem] items-center justify-between">
             <div className="w-[64px] h-[64px] overflow-hidden rounded-[8px]">
               <Suspense fallback={<Loading />}>
                 <Image
@@ -59,7 +59,7 @@ const ItemInTheCart = () => {
             <ul>
               <li>
                 <span className="text-dark-100 text-[15px] font-bold leading-[25px]">
-                  {item.name}
+                  {item.name.split(" ").shift()}
                 </span>
               </li>
               <li>
@@ -69,18 +69,25 @@ const ItemInTheCart = () => {
               </li>
             </ul>
           </div>
-          <AddAndDelItemBtns
-            stock={item.stock}
-            isInCart={true}
-            productId={item.id}
-            productName={item.name}
-            initialAmount={item.quantity}
-            className="h-[32px_!important] w-[32px_!important]"
-          />
+          {checkout ? (
+            <span className="text-dark-100/50 font-bold text-[14px] leading-[25px]">
+              <span>x</span>
+              {item.quantity}
+            </span>
+          ) : (
+            <AddAndDelItemBtns
+              stock={item.stock}
+              isInCart={true}
+              productId={item.id}
+              productName={item.name}
+              initialAmount={item.quantity}
+              className="h-[32px_!important] w-[32px_!important]"
+            />
+          )}
         </motion.div>
       ))}
     </>
   );
-}
+};
 
-export default ItemInTheCart
+export default ItemInTheCart;

@@ -29,7 +29,7 @@ const Showcase_3 = () => {
           <Button
             variant="border"
             text="See Product"
-            href="/speakers/zx7"
+            href="/singleproduct/yx1-earphones"
             className="block w-fit"
           />
         </div>

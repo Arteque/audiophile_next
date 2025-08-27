@@ -11,12 +11,13 @@ import { usePathname } from "next/navigation";
 const Footer = () => {
   const router = usePathname();
   const notHome = router !== "/";
+  const checkout = router !== "/Checkout";
 
   return (
     <>
-      {notHome && <Categories />}
-      <PreFooter className="mt-[120px]" />
-      <footer className=" bg-dark-100 mt-[120px] md:mt-[96px] lg:mt-[200px]">
+      {notHome || (checkout && <Categories />)}
+      {checkout && <PreFooter className="mt-[120px]" />}
+      <footer className=" bg-dark-100 t-[120px] md:mt-[96px] lg:mt-[200px]">
         <Container
           className="footerContainer text-center relative py-[52px_38px] md:text-left
         md:grid md:grid-cols-2
