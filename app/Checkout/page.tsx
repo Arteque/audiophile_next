@@ -1,7 +1,7 @@
 import Section from "@/_components/Assets/Section";
 import Container from "@/_components/Assets/Container";
 import GoBack from "@/_components/shared/GoBack";
-import Form from "../Form/Form";
+import Form from "@/_components/Assets/Form/Form";
 
 const page = () => {
   return (

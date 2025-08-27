@@ -8,6 +8,7 @@ import { motion } from "motion/react";
 import ItemInTheCart from "@/_components/Assets/Cart/ItemInTheCart";
 
 import Currency from "@/Tools/Currency";
+import Ordered from "./Ordered";
 
 const Form = () => {
   const cart = useCartStore((state) => state.items);
@@ -182,7 +183,7 @@ const Form = () => {
           </motion.div>
         </fieldset>
       </div>
-      <div className="col-2 rounded-2xl bg-light-200 p-[1.5rem] md:p-[48px] h-fit">
+      <div className="col-2 rounded-2xl bg-light-200 p-[1.5rem] md:p-[48px] h-fit md:min-w-[40%] md:sticky md:top-30">
         <h4 className="text-[1.125rem] font-bold uppercase text-black mb-[1.5rem] mt-[2rem] md:mt-0">
           Summary
         </h4>
@@ -239,6 +240,7 @@ const Form = () => {
           Continue and Pay
         </button>
       </div>
+      <Ordered />
     </form>
   );
 };
