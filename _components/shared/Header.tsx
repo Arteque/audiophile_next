@@ -10,7 +10,7 @@ const Header = () => {
         <Burger />
         <Logo className="md:mr-[auto] md:mx-[42px] lg:mx-[unset]" />
         <Nav variant="main" />
-        <Cart itemsCount={0} />
+        <Cart />
       </Container>
     </header>
   );

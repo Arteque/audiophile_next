@@ -2,27 +2,66 @@
 import { FaTrash } from "react-icons/fa";
 import Amount from "./Amount";
 import AmountBtn from "./AmountBtn";
-import { useState } from "react";
-const AddAndDelItemBtns = ({
-  stock,
-  isInCart,
-  className,
-}: {
+import { useState, useEffect } from "react";
+import { useCartStore } from "@/store/cartStore";
+
+interface AddAndDelItemBtnsProps {
   stock: number;
   isInCart?: boolean;
   className?: string;
-}) => {
-  //Amount
-  const [amount, setAmount] = useState<number>(1);
+  productId?: string;
+  onAmountChange?: (amount: number) => void;
+  initialAmount?: number;
+}
+
+const AddAndDelItemBtns = ({
+  stock,
+  isInCart = false,
+  className,
+  productId,
+  onAmountChange,
+  initialAmount = 1,
+}: AddAndDelItemBtnsProps) => {
+  const [amount, setAmount] = useState<number>(initialAmount);
+  const { updateQuantity, removeItem } = useCartStore();
 
   const amountBtnDelHandler = () => {
-    amount > 0 ? setAmount((prev) => prev - 1) : setAmount(0);
+    const newAmount = amount > 0 ? amount - 1 : 0;
+    setAmount(newAmount);
+    
+    if (isInCart && productId) {
+      if (newAmount === 0) {
+        removeItem(productId);
+      } else {
+        updateQuantity(productId, newAmount);
+      }
+    } else {
+      onAmountChange?.(newAmount);
+    }
   };
+
   const amoutBtnAddHandler = () => {
-    amount < stock
-      ? setAmount((prev) => prev + 1)
-      : alert("Max Stock: " + stock);
+    if (amount < stock) {
+      const newAmount = amount + 1;
+      setAmount(newAmount);
+      
+      if (isInCart && productId) {
+        updateQuantity(productId, newAmount);
+      } else {
+        onAmountChange?.(newAmount);
+      }
+    } else {
+      // Better user feedback for stock limitation
+      console.warn(`Cannot add more items. Maximum stock: ${stock}`);
+      if (isInCart) {
+        alert(`Maximum stock reached: ${stock}`);
+      }
+    }
   };
+
+  useEffect(() => {
+    setAmount(initialAmount);
+  }, [initialAmount]);
 
   return (
     <>
@@ -58,7 +97,7 @@ const AddAndDelItemBtns = ({
         </div>
         <p>
           <small className="text-dark-100/50">
-            Stock:{amount} /{stock}
+            {isInCart ? `Qty: ${amount}/${stock}` : `Stock: ${amount}/${stock}`}
           </small>
         </p>
       </div>

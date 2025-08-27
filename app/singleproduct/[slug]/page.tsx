@@ -9,6 +9,7 @@ import Paragraph from "@/_components/Assets/Paragraph";
 import AddAndDelItemBtns from "@/_components/Assets/Cart/AddAndDelItemBtns";
 import { getProductBySlug, getAllProducts, Product } from "@/lib/data";
 import Features from "@/_components/shared/Product/Features";
+import ProductAddToCart from "@/_components/Assets/Cart/ProductAddToCart";
 
 export async function generateStaticParams() {
   const products = await getAllProducts();
@@ -90,10 +91,7 @@ const SingleProductPage = async ({ params }: { params: Promise<{ slug: string }>
               <p className="mb-[31px] font-bold text-[18px] tracking-[1.29px]">
                 {Currency(product.price, "USD")}
               </p>
-              <div className="buy-container flex items-start gap-[1rem]">
-                <AddAndDelItemBtns stock={product.stock} />
-                <Button variant="call" text="Add to cart" href="/" />
-              </div>
+              <ProductAddToCart product={product} />
             </div>
           </div>
           

@@ -3,45 +3,36 @@
 import { useEffect, useState, FC, MouseEvent } from "react";
 import Image from "next/image";
 import Checkout from "./Checkout";
+import { useCartStore } from "@/store/cartStore";
 
-interface CartProps {
-  itemsCount?: number;
-}
 
-const Cart: FC<CartProps> = ({ itemsCount = 0 }) => {
+
+const Cart = () => {
   const [cartState, setCartState] = useState<boolean>(false);
   const [cartText, setCartText] = useState("");
+  const { totalItems, totalPrice } = useCartStore();
 
   const cartHanlder = (e: MouseEvent<HTMLButtonElement>) => {
     setCartState((prev) => !prev);
   };
 
+  const closeCart = () => {
+    setCartState(false);
+  };
+
   useEffect(() => {
-    switch (itemsCount) {
+    switch (totalItems) {
       case 0:
         setCartText(`Your cart is empty`);
         break;
       case 1:
-        setCartText(`You have ${itemsCount} item in your cart!`);
+        setCartText(`You have ${totalItems} item in your cart! Total: $${totalPrice.toFixed(2)}`);
         break;
       default:
-        setCartText(`You have ${itemsCount} items in your cart`);
+        setCartText(`You have ${totalItems} items in your cart. Total: $${totalPrice.toFixed(2)}`);
         break;
     }
-  }, [itemsCount]);
-
-  useEffect(() => {
-    try {
-      const fetchCartItems = async () => {
-        const response = await fetch("/api/GetCardItems");
-        const data = await response.json();
-        console.log(data);
-      };
-      fetchCartItems();
-    } catch (error) {
-      console.error("Error fetching cart items:", error);
-    }
-  }, []);
+  }, [totalItems, totalPrice]);
 
   return (
     <>
@@ -67,11 +58,16 @@ const Cart: FC<CartProps> = ({ itemsCount = 0 }) => {
             height={20}
           />
         )}
-        {itemsCount > 0
-          ? `<span className="pointer-events-none items-count w-5 h-5 absolute bottom-[-10px] right-[-10px] text-xs font-bold rounded-full bg-light-100 text-dark-100 flex justify-center items-center"></span>${itemsCount}</span>`
-          : ""}
+        {totalItems > 0 && (
+          <>
+            <span className={`pointer-events-none items-count w-5 h-5 absolute bottom-[-10px] right-[-10px] text-xs font-bold rounded-full bg-light-100 text-dark-100 flex justify-center items-center transition-all duration-500 ${cartState ? 'top-5 opacity-0' : 'top-0 opacity-100'}`}>
+              {totalItems}
+            </span>
+            
+          </>
+        )}
       </button>
-      <Checkout cartState={cartState} />
+      <Checkout cartState={cartState} onClose={closeCart} />
     </>
   );
 };
