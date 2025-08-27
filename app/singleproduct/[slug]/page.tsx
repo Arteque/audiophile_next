@@ -6,10 +6,10 @@ import Image from "next/image";
 import Subhead from "@/_components/Assets/Subhead";
 import Currency from "@/Tools/Currency";
 import Paragraph from "@/_components/Assets/Paragraph";
-import AddAndDelItemBtns from "@/_components/Assets/Cart/AddAndDelItemBtns";
-import { getProductBySlug, getAllProducts, Product } from "@/lib/data";
+import { getProductBySlug, getAllProducts } from "@/lib/data";
 import Features from "@/_components/shared/Product/Features";
 import ProductAddToCart from "@/_components/Assets/Cart/ProductAddToCart";
+import GoBack from "@/_components/shared/GoBack";
 
 export async function generateStaticParams() {
   const products = await getAllProducts();
@@ -56,12 +56,7 @@ const SingleProductPage = async ({ params }: { params: Promise<{ slug: string }>
     <>
       <Section>
         <Container>
-          <Button
-            href={`/products/${product.category}`}
-            variant="default"
-            text="Go Back"
-            className="block my-[1rem_24px]"
-          />
+          <GoBack  />
 
           <div className="product-view-container lg:flex lg:gap-[125px] lg:items-center">
             <div className="product-view__media lg:flex-1">

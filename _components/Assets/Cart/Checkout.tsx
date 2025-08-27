@@ -1,22 +1,26 @@
 "use client";
 import { motion, AnimatePresence } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ItemInTheCart from "./ItemInTheCart";
 import Button from "../Button";
 import PriceSummary from "./PriceSummary";
-import { useCartStore } from "@/store/cartStore";
+import { useCartStore } from "@/store/CartStore";
 
 const Checkout = ({ cartState = false, onClose }: { cartState: boolean; onClose?: () => void }) => {
-  const { 
-    items, 
-    totalItems, 
-    clearCart
-  } = useCartStore();
+  const items = useCartStore((state) => state.items);
+  const totalItems = useCartStore((state) => state.totalItems);
+  const clearCart = useCartStore((state) => state.clearCart);
 
   const checkoutHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     // TODO: Implement actual checkout logic
     console.log('Checkout initiated with items:', items);
+
+    if(items.length <= 0) {
+      return
+    }
+    window.location.href = "/Checkout";
+
   };
 
   const removeAllHandler = () => {
@@ -92,7 +96,7 @@ const Checkout = ({ cartState = false, onClose }: { cartState: boolean; onClose?
                 <PriceSummary className="mb-6" />
                 
                 <Button
-                  href="/"
+                  href="/Checkout"
                   variant="call"
                   text="Checkout"
                   onClick={checkoutHandler}

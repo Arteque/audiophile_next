@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "../styles/globals.css";
+import "../styles/toast.css";
 import Header from "@/_components/shared/Header";
 import Footer from "@/_components/shared/Footer";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata: Metadata = {
   title: {
@@ -27,6 +30,18 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </body>
     </html>
   );

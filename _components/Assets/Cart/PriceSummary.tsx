@@ -1,5 +1,5 @@
 "use client";
-import { useCartStore } from "@/store/cartStore";
+import { useCartStore } from "@/store/CartStore";
 import Currency from "@/Tools/Currency";
 
 interface PriceSummaryProps {
@@ -17,7 +17,7 @@ const PriceSummary = ({
   taxRate = 0.20,
   className = "",
 }: PriceSummaryProps) => {
-  const { totalPrice } = useCartStore();
+  const totalPrice = useCartStore((state) => state.totalPrice);
 
   if (totalPrice === 0) {
     return (

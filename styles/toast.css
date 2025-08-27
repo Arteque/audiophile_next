@@ -1,0 +1,102 @@
+/* Custom toast styles to match the audiophile theme */
+.Toastify__toast-container {
+  font-family: inherit;
+}
+
+.Toastify__toast {
+  border-radius: 8px;
+  min-height: 64px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.Toastify__toast--success {
+  background: var(--color-prime-100);
+  color: white;
+}
+
+.Toastify__toast--success .Toastify__toast-icon > svg {
+  fill: white;
+}
+
+.Toastify__toast--error {
+  background: var(--color-dark-200);
+  color: white;
+}
+
+.Toastify__toast--error .Toastify__toast-icon > svg {
+  fill: white;
+}
+
+.Toastify__toast--warning {
+  background: var(--color-prime-200);
+  color: var(--color-dark-100);
+}
+
+.Toastify__toast--warning .Toastify__toast-icon > svg {
+  fill: var(--color-dark-100);
+}
+
+.Toastify__toast--info {
+  background: var(--color-light-100);
+  color: var(--color-dark-100);
+  border: 1px solid var(--color-dark-100);
+}
+
+.Toastify__toast--info .Toastify__toast-icon > svg {
+  fill: var(--color-dark-100);
+}
+
+.Toastify__progress-bar--success {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.Toastify__progress-bar--error {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.Toastify__progress-bar--warning {
+  background: rgba(16, 16, 16, 0.3); /* Using dark-100 with opacity for warning */
+}
+
+.Toastify__progress-bar--info {
+  background: var(--color-prime-100);
+}
+
+.Toastify__close-button {
+  opacity: 0.8;
+}
+
+.Toastify__close-button:hover {
+  opacity: 1;
+}
+
+/* Success and Error close buttons - white for dark backgrounds */
+.Toastify__toast--success .Toastify__close-button,
+.Toastify__toast--error .Toastify__close-button {
+  color: white;
+}
+
+/* Warning and Info close buttons - dark for light backgrounds */
+.Toastify__toast--warning .Toastify__close-button,
+.Toastify__toast--info .Toastify__close-button {
+  color: var(--color-dark-100);
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    left: 0;
+    right: 0;
+  }
+  
+  .Toastify__toast {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+}

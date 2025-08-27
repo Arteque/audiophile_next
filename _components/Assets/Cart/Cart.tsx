@@ -3,14 +3,15 @@
 import { useEffect, useState, FC, MouseEvent } from "react";
 import Image from "next/image";
 import Checkout from "./Checkout";
-import { useCartStore } from "@/store/cartStore";
+import { useCartStore } from "@/store/CartStore";
 
 
 
 const Cart = () => {
   const [cartState, setCartState] = useState<boolean>(false);
   const [cartText, setCartText] = useState("");
-  const { totalItems, totalPrice } = useCartStore();
+  const totalItems = useCartStore((state) => state.totalItems);
+  const totalPrice = useCartStore((state) => state.totalPrice);
 
   const cartHanlder = (e: MouseEvent<HTMLButtonElement>) => {
     setCartState((prev) => !prev);

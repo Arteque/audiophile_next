@@ -3,13 +3,15 @@ import { FaTrash } from "react-icons/fa";
 import Amount from "./Amount";
 import AmountBtn from "./AmountBtn";
 import { useState, useEffect } from "react";
-import { useCartStore } from "@/store/cartStore";
+import { useCartStore } from "@/store/CartStore";
+import { cartToast } from "@/lib/toast";
 
 interface AddAndDelItemBtnsProps {
   stock: number;
   isInCart?: boolean;
   className?: string;
   productId?: string;
+  productName?: string;
   onAmountChange?: (amount: number) => void;
   initialAmount?: number;
 }
@@ -19,11 +21,13 @@ const AddAndDelItemBtns = ({
   isInCart = false,
   className,
   productId,
+  productName,
   onAmountChange,
   initialAmount = 1,
 }: AddAndDelItemBtnsProps) => {
   const [amount, setAmount] = useState<number>(initialAmount);
-  const { updateQuantity, removeItem } = useCartStore();
+  const updateQuantity = useCartStore((state) => state.updateQuantity);
+  const removeItem = useCartStore((state) => state.removeItem);
 
   const amountBtnDelHandler = () => {
     const newAmount = amount > 0 ? amount - 1 : 0;
@@ -51,10 +55,9 @@ const AddAndDelItemBtns = ({
         onAmountChange?.(newAmount);
       }
     } else {
-      // Better user feedback for stock limitation
-      console.warn(`Cannot add more items. Maximum stock: ${stock}`);
-      if (isInCart) {
-        alert(`Maximum stock reached: ${stock}`);
+      // Show toast notification for stock limitation
+      if (productName) {
+        cartToast.stockLimitReached(productName, stock);
       }
     }
   };

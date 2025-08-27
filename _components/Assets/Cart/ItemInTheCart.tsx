@@ -4,10 +4,10 @@ import Loading from "@/Tools/Loading"
 import { Suspense } from "react"
 import Currency from "@/Tools/Currency"
 import AddAndDelItemBtns from "./AddAndDelItemBtns"
-import { useCartStore } from "@/store/cartStore"
+import { useCartStore } from "@/store/CartStore"
 
 const ItemInTheCart = () => {
-  const { items } = useCartStore();
+  const items = useCartStore((state) => state.items);
 
   if (!items.length) {
     return (
@@ -73,6 +73,7 @@ const ItemInTheCart = () => {
             stock={item.stock}
             isInCart={true}
             productId={item.id}
+            productName={item.name}
             initialAmount={item.quantity}
             className="h-[32px_!important] w-[32px_!important]"
           />
