@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useCartStore } from "@/store/CartStore";
 
 import Label from "./Label";
@@ -15,20 +15,23 @@ const Form = () => {
   const shippingCost = 50;
   const vat = 0;
 
+
   const [emoney, setEmoney] = useState<boolean>(false);
 
   const PaymentChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("Payment Method Selected:", e.target.value);
-
     e.target.value === "e-money" ? setEmoney(true) : setEmoney(false);
   };
 
-  useEffect(() => {
-    console.log("Emoney selected:", emoney);
-  }, [emoney]);
+
+  const [orderState, setOrderState] = useState<boolean>(false);
+
+  const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setOrderState(true);
+  }
 
   return (
-    <form className="mt-[1rem] w-full md:flex md:gap-[2rem]">
+    <form className="mt-[1rem] w-full md:flex md:gap-[2rem]" onSubmit={formSubmitHandler}>
       <div className="col-1 bg-light-200 p-[23px] md:p-[3rem] rounded-2xl mb-[1rem]">
         <fieldset>
           <Legend>Billing Details</Legend>
@@ -152,8 +155,8 @@ const Form = () => {
             </div>
           </div>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: emoney ? 1 : 0, y: emoney ? 0 : 20 }}
+            initial={{ height:0, opacity: 0, y: 20 }}
+            animate={{ height:emoney ? 100 : 0, opacity: emoney ? 1 : 0, y: emoney ? 0 : 20 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.2 }}
             className="flex flex-col gap-[1rem] md:flex-row md:justify-between mt-[24px]"
@@ -164,7 +167,7 @@ const Form = () => {
                 type="text"
                 name="e-money-number"
                 id="e-money-number"
-                required
+                required ={emoney}
                 placeholder="238521993"
                 className="block w-full rounded-[8px] p-[1rem_24px] border-2 border-[#cfcfcf]"
               />
@@ -175,7 +178,7 @@ const Form = () => {
                 type="text"
                 name="e-money-pin"
                 id="e-money-pin"
-                required
+                required = {emoney}
                 placeholder="6891"
                 className="block w-full rounded-[8px] p-[1rem_24px] border-2 border-[#cfcfcf]"
               />
@@ -240,7 +243,9 @@ const Form = () => {
           Continue and Pay
         </button>
       </div>
-      <Ordered />
+      {
+        orderState && <Ordered state={orderState} />
+      }
     </form>
   );
 };

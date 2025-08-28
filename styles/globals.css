@@ -25,7 +25,9 @@ body::after {
   transition: all 0.3s;
 }
 body[data-menu="open"]::after,
-body[data-cart="open"]::after {
+body[data-cart="open"]::after,
+body[data-ordercard="open"]::after
+ {
   opacity: 0.8;
   backdrop-filter: grayscale(1);
   -webkit-backdrop-filter: grayscale(1);
