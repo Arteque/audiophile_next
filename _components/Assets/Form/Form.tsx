@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCartStore } from "@/store/CartStore";
 
 import Label from "./Label";
@@ -12,8 +12,9 @@ import Ordered from "./Ordered";
 
 const Form = () => {
   const cart = useCartStore((state) => state.items);
-  const shippingCost = 50;
-  const vat = 0;
+  const clearCart = useCartStore((state) => state.clearCart);
+  const shippingCost = useCartStore((state) => state.shippingCosts);
+  const vat = useCartStore((state) => state.vat);
 
 
   const [emoney, setEmoney] = useState<boolean>(false);
@@ -243,9 +244,8 @@ const Form = () => {
           Continue and Pay
         </button>
       </div>
-      {
-        orderState && <Ordered state={orderState} />
-      }
+      {orderState && <Ordered state={orderState} aria-hidden={!orderState} className={orderState ? "block" : "hidden"} />}
+
     </form>
   );
 };

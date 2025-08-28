@@ -11,7 +11,7 @@ export default async function handler(
 
   try {
     const response = await shopwareFetch(`checkout/cart`, "GET");
-    const cart = await reponse.json();
+    const cart = await response.json();
 
     if (!cart.length) {
       return res.status(404).json({ error: "Cart is empty" });
@@ -19,6 +19,6 @@ export default async function handler(
 
     res.status(200).json(cart);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch cart items" });
+    res.status(500).json({ error: "Failed to fetch cart items" + error });
   }
 }

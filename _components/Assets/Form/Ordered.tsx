@@ -1,27 +1,24 @@
 "use client";
 import Image from "next/image";
 import { useCartStore } from "@/store/CartStore";
-import { useEffect } from "react";
 import Currency from "@/Tools/Currency";
 import Button from "../Button";
-const Ordered = ({state = false}:{state:boolean}) => {
+
+
+const Ordered = ({state = false, className, ...props}:{state:boolean, className?:string}) => {
   const cart = useCartStore((state) => state.items);
   const resetCart = useCartStore((state) => state.clearCart);
 
   const goHomeHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    // Clear the cart and navigate to the homepage
     resetCart();
-    state = false;
     window.location.href = "/";
   };
 
-  useEffect(()=>{
-    document.body.dataset.ordercard = state ? "open" : "closed";
-  },[state])
-
+  
   return (
-    <div className="p-[32px] fixed left-[10%] right-[10%] max-w-[540px] top-[50dvh] translate-y-[-50%] mx-auto z-[99999]  bg-light-200  rounded-[8px]">
+   <>
+    <div className={`p-[32px] fixed left-[10%] right-[10%] max-w-[540px] top-[50dvh] translate-y-[-50%] mx-auto z-[99999]  bg-light-200  rounded-[8px] ${className}`} {...props}>
         <Image
         aria-hidden="true"
         src="/checkout/icon-order-confirmation.svg"
@@ -34,7 +31,7 @@ const Ordered = ({state = false}:{state:boolean}) => {
       <p className="text-center text-dark-100/50 my-[1rem]">
         You will receive an email confirmation shortly.
       </p>
-      <div className="rounded-3xl overflow-hidden">
+      <div className="rounded-3xl overflow-hidden md:flex md:justify-center">
        <div className="bg-light-100 rounded-t-[8px] px-[24px] pt-[24px]">
          {cart.map(
           (item, index) =>
@@ -63,15 +60,17 @@ const Ordered = ({state = false}:{state:boolean}) => {
           </p>
         )}
        </div>
-        <div className="bg-dark-100 px-[24px] py-[15px]">
+        <div className="bg-dark-100 px-[24px] py-[15px] md:rounded-r-[8px] md:place-content-center md:pb-0">
           <span className="text-light-200/50 uppercase block w-full mn-[8px] font-medium">Grand Total</span>
           <span className="text-light-100 text-[18px] mt-[8px] font-bold block mb-[19px]">
-            {Currency(cart.reduce((acc, item) => acc + item.price, 0), "USD")}
+            {Currency(cart.reduce((acc, item) => acc + item.price * item.quantity, 0), "USD")}
           </span>
         </div>
       </div>
-        <Button variant="call" href="/" text="Go to Homepage" className="mx-auto w-full mt-5 block text-center" onClick={goHomeHandler}/>
+        <Button variant="call" href="/" text="Go to Homepage" className="mx-auto w-full mt-5 block text-center uppercase" onClick={goHomeHandler}/>
     </div>
+    <div className="fixed inset-0 bg-dark-100/80 z-[9999] backdrop-grayscale-100"></div>
+   </>
   );
 };
 
