@@ -2,11 +2,11 @@
 
 A modern, responsive e-commerce web application for premium audio equipment built with Next.js and TypeScript, integrated with Shopware 6 backend.
 
-## 🚀 Project Overview
+## Project Overview
 
 Audiophile is a full-featured e-commerce platform specializing in high-end audio equipment including headphones, speakers, and earphones. The application provides a seamless shopping experience with modern web technologies and performance optimizations.
 
-### ✨ Key Features
+###  Key Features
 
 - **🛍️ Product Catalog**: Browse premium audio equipment by categories
 - **🔍 Product Details**: Detailed product pages with image galleries and specifications
@@ -16,7 +16,7 @@ Audiophile is a full-featured e-commerce platform specializing in high-end audio
 - **🔐 Type Safety**: Full TypeScript implementation
 - **🎨 Modern UI**: Clean, minimalist design with accessibility features
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 
@@ -106,7 +106,7 @@ audiophile_next/
 1. **Clone the repository**
 
    ```bash
-   git clone [repository-url]
+   git clone https://github.com/Arteque/audiophile_next.git
    cd audiophile_next
    ```
 
