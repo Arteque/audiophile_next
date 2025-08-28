@@ -9,7 +9,8 @@ import Button from "@/_components/Assets/Button";
 import { getProductsByCategory, getCategoryByPath, getAllCategories, Product } from "@/lib/data";
 
 export async function generateStaticParams() {
-  const categories = await getAllCategories();
+  const categoriesRaw = await getAllCategories();
+  const categories = Array.isArray(categoriesRaw) ? categoriesRaw : [];
   return categories.map((category) => ({
     slug: category.path,
   }));
@@ -39,7 +40,8 @@ export async function generateMetadata({
 const ProductPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
   const category = await getCategoryByPath(slug);
-  const products = await getProductsByCategory(slug);
+  const productsRaw = await getProductsByCategory(slug);
+  const products = Array.isArray(productsRaw) ? productsRaw : [];
 
   if (!category) {
     return <div>Category not found</div>;
